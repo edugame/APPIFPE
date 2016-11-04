@@ -1,0 +1,26 @@
+#float{
+position: fixed;
+right: 24px;
+bottom: 24px;
+padding-top: 24px;
+margin-bottom: 0;
+z-index: 998;
+}
+	
+
+
+.demo-card-image.mdl-card {
+  width: 406px;
+  height: 256x;
+ background: url('../image/logo.png') center / cover;
+}
+.demo-card-image > .mdl-card__actions {
+  height: 52px;
+  padding: 16px;
+ background: rgba(0, 0, 0, 0.2);
+}
+.demo-card-image__filename {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}

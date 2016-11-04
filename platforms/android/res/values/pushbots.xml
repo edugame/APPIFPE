@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Pushbots Application ID -->
+	<string name="pb_appid">572672d34a9efaa64e8b4569</string>
+
+	<!-- GCM Project ID -->
+	<string name="pb_senderid">587445918557</string>
+
+	<!-- Pushbots Log Level -->
+	<string name="pb_logLevel">DEBUG</string>
+</resources>
