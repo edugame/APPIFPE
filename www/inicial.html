@@ -55,10 +55,12 @@
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
       mdl-layout--fixed-header" ng-app="myApp" ng-controller="customersCtrl">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
   <header class="mdl-layout__header">
   <div class="mdl-layout__header-row">
     <div class="mdl-layout-spacer"></div>
-    <div class="mdl-layout-spacer"><span class=" white-text text-darken-1">NOTIFICAÇÕES</span></div>
+    <div class="mdl-layout-spacer"><span class="mdl-layout-title">NOTIFICAÇÕES</span></div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
           mdl-textfield--floating-label mdl-textfield--align-right">
     <label class="mdl-button mdl-js-button mdl-button--icon"
@@ -72,8 +74,15 @@
     </div>
     </div>
   </div>
-        
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="#fixed-tab-1" class="mdl-layout__tab is-active"><div class="material-icons ">feedback</div></a>
+      <a href="#fixed-tab-2" class="mdl-layout__tab"><div class="material-icons">assessment</div></a>
+      <a href="#fixed-tab-3" class="mdl-layout__tab"><div class="material-icons">settings</div></a>
+    </div> 
   </header>
+  
+  
+  
   
   
   
@@ -86,8 +95,10 @@
     <a class="mdl-navigation__link" href="" ng-click="sair();">Sair</a>
   </nav>
   </div>
-
-    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active " ng-click="listar();" style="
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+      <div class="page-content">
+	   <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active " ng-click="listar();" style="
     left: 45%;
     top: 25%;" ng-show="mostrar"></div>
 
@@ -97,29 +108,48 @@
   <div class="page-content">
     <ul class="demo-list-three mdl-list">
   <li class="mdl-list__item mdl-list__item--three-line" ng-repeat="x in myData">
-  <span class="mdl-list__item-primary-content" style="color:red;">
-    
-    <span>
-    <span ng-bind="x.id +' - '+x.campus"></span>
-        <span class="mdl-list__item-text-body">
-    Bryan Cranston played the role of Walter in Breaking.
-    
-         </span>
-  </span>
-  </span>
-  <span class="mdl-list__item-secondary-content">
-    <a class="" href="#"><i class="material-icons" ng-hide="{{x.id >20}}">star</i></a>
-  </span>
+    <span class="mdl-list__item-primary-content">
+      <i class="material-icons mdl-list__item-avatar">person</i>
+     <span ng-bind="x.id +' - '+x.campus"></span>
+      <span class="mdl-list__item-text-body">
+        Bryan Cranston played the role of Walter in Breaking Bad. He is also known
+        for playing Hal in Malcom in the Middle.
+      </span>
+    </span>
+    <span class="mdl-list__item-secondary-content">
+      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons" ng-hide="{{x.id >20}}" >thumb_up</i></a>
+    </span>
   </li>
-  
-  </ul>
+
+</ul>
     </div>
-   <a href="#"> <button id="float" class="mdl-button  mdl-js-button mdl-button--fab mdl-button--colored">
-  <i class="material-icons">add</i>
-  </button></a>
+   
   </main>
 
   </div>
+	  
+	  
+	  </div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+      <div class="page-content"><!-- Your content goes here --></div>
+    </section>
+    <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+      <div class="page-content"><!-- Your content goes here --></div>
+    </section>
+  </main>
+</div>
+  
+  
+  
+  
+</div>
+  
+  
+  
+
+
+   
 
 
       <!--Import jQuery before materialize.js-->
