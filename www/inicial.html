@@ -22,10 +22,20 @@
         app.controller('customersCtrl', function($scope, $http) {
 
         var listar = function() {
+          var usuario = localStorage.login;
           $scope.mostrar = true;
-          $http.get('http://www.ifpe.esy.es/restDAO/campus/queryAllOrderBy/id').success(function (dados) {
+          $http.get('http://ifpe.esy.es/mobile/restDAO/notificacao/loadUsuario/'+usuario).success(function (dados) {
           $scope.myData = dados;
           $scope.mostrar = false;
+        }).error(function (dados) {
+         console.log(2);
+        });
+        };
+
+        var pesquisarProfessor = function(professor) {
+          $http.get('http://ifpe.esy.es/mobile/restDAO/usuario/load/'+professor).success(function (dados) {
+          $scope.myProfessor = dados;
+        
         }).error(function (dados) {
          console.log(2);
         });
@@ -36,7 +46,10 @@
 
        listar();
 
+        $scope.atualizar = function(){
 
+         listar();
+        }
 
         $scope.sair = function(){
 
@@ -48,24 +61,396 @@
         });
         </script> 
 
+<style>
 
+img {
+    vertical-align: middle;
+}
+
+.img-responsive {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+.img-rounded {
+    border-radius: 3px;
+}
+
+.img-thumbnail {
+    background-color: #fff;
+    border: 1px solid #ededf0;
+    border-radius: 3px;
+    display: inline-block;
+    height: auto;
+    line-height: 1.428571429;
+    max-width: 100%;
+    moz-transition: all .2s ease-in-out;
+    o-transition: all .2s ease-in-out;
+    padding: 2px;
+    transition: all .2s ease-in-out;
+    webkit-transition: all .2s ease-in-out;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.kanban-centered {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+    .kanban-centered:before, .kanban-centered:after {
+        content: " ";
+        display: table;
+    }
+
+    .kanban-centered:after {
+        clear: both;
+    }
+
+    .kanban-centered:before, .kanban-centered:after {
+        content: " ";
+        display: table;
+    }
+
+    .kanban-centered:after {
+        clear: both;
+    }
+
+    .kanban-centered:before {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 2px;
+        /*background: #f5f5f6;*/
+        top: 20px;
+        bottom: 20px;
+        /*margin-left: 18px;*/
+    }
+
+    .kanban-centered .kanban-entry {
+        position: relative;
+        /*width: 50%;
+        float: right;*/
+        margin: 10px 8px;
+        clear: both;
+        border-radius: 4px;
+        -webkit-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+        -moz-box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+        box-shadow: 1px 1px 2px 0px rgba(50, 50, 50, 0.5);
+    }
+
+        .kanban-centered .kanban-entry:before, .kanban-centered .kanban-entry:after {
+            content: " ";
+            display: table;
+        }
+
+        .kanban-centered .kanban-entry:after {
+            clear: both;
+        }
+
+        .kanban-centered .kanban-entry:before, .kanban-centered .kanban-entry:after {
+            content: " ";
+            display: table;
+        }
+
+        .kanban-centered .kanban-entry:after {
+            clear: both;
+        }
+
+        .kanban-centered .kanban-entry.begin {
+            margin-bottom: 0;
+        }
+
+        .kanban-centered .kanban-entry.left-aligned {
+            float: left;
+        }
+
+            .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner {
+                margin-left: 0;
+                margin-right: -18px;
+            }
+
+                .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-time {
+                    left: auto;
+                    right: -100px;
+                    text-align: left;
+                }
+
+                .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-icon {
+                    float: right;
+                }
+
+                .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-label {
+                    margin-left: 0;
+                    margin-right: 70px;
+                }
+
+                    .kanban-centered .kanban-entry.left-aligned .kanban-entry-inner .kanban-label:after {
+                        left: auto;
+                        right: 0;
+                        margin-left: 0;
+                        margin-right: -9px;
+                        -moz-transform: rotate(180deg);
+                        -o-transform: rotate(180deg);
+                        -webkit-transform: rotate(180deg);
+                        -ms-transform: rotate(180deg);
+                        transform: rotate(180deg);
+                    }
+
+        .kanban-centered .kanban-entry .kanban-entry-inner {
+            position: relative;
+            /*margin-left: -24px;*/
+        }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner:before, .kanban-centered .kanban-entry .kanban-entry-inner:after {
+                content: " ";
+                display: table;
+            }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner:after {
+                clear: both;
+            }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner:before, .kanban-centered .kanban-entry .kanban-entry-inner:after {
+                content: " ";
+                display: table;
+            }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner:after {
+                clear: both;
+            }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time {
+                position: absolute;
+                left: -100px;
+                text-align: right;
+                padding: 10px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time > span {
+                    display: block;
+                }
+
+                    .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time > span:first-child {
+                        font-size: 15px;
+                        font-weight: bold;
+                    }
+
+                    .kanban-centered .kanban-entry .kanban-entry-inner .kanban-time > span:last-child {
+                        font-size: 12px;
+                    }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon {
+                background: #fff;
+                color: #737881;
+                display: block;
+                width: 25px;
+                height: 25px;
+                -webkit-background-clip: padding-box;
+                -moz-background-clip: padding;
+                background-clip: padding-box;
+                -webkit-border-radius: 20px;
+                -moz-border-radius: 20px;
+                border-radius: 20px;
+                text-align: center;
+                -moz-box-shadow: 0 0 0 4px #f5f5f6;
+                -webkit-box-shadow: 0 0 0 4px #f5f5f6;
+                box-shadow: 0 0 0 4px #f5f5f6;
+                float: left;
+                margin-top: 6px;
+            }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-primary {
+                    background-color: #303641;
+                    color: #fff;
+                }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-secondary {
+                    background-color: #ee4749;
+                    color: #fff;
+                }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-success {
+                    background-color: #00a651;
+                    color: #fff;
+                }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-info {
+                    background-color: #21a9e1;
+                    color: #fff;
+                }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-warning {
+                    background-color: #fad839;
+                    color: #fff;
+                }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-icon.bg-danger {
+                    background-color: #cc2424;
+                    color: #fff;
+                }
+
+            .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label {
+                position: relative;
+                background: #f5f5f6;
+                padding: 0.75em;
+                /*margin-left: 50px;*/
+                -webkit-background-clip: padding-box;
+                -moz-background-clip: padding;
+                background-clip: padding-box;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+
+                /*.kanban-centered .kanban-entry .kanban-entry-inner .kanban-label:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-width: 9px 9px 9px 0;
+                    border-color: transparent #f5f5f6 transparent transparent;
+                    left: 0;
+                    top: 10px;
+                    margin-left: -9px;
+                }*/
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2, .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p {
+                    color: #737881;
+                    font-family: "Noto Sans",sans-serif;
+                    font-size: 12px;
+                    margin: 0;
+                    line-height: 1.428571429;
+                }
+
+                    .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label p + p {
+                        margin-top: 15px;
+                    }
+
+                .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 {
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                }
+
+                    .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 a {
+                        color: #303641;
+                    }
+
+                    .kanban-centered .kanban-entry .kanban-entry-inner .kanban-label h2 span {
+                        -webkit-opacity: .6;
+                        -moz-opacity: .6;
+                        opacity: .6;
+                        -ms-filter: alpha(opacity=60);
+                        filter: alpha(opacity=60);
+                    }
+
+
+.modal-static {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    margin-top: -100px;
+    margin-left: -100px;
+    overflow: visible !important;
+}
+
+    .modal-static,
+    .modal-static .modal-dialog,
+    .modal-static .modal-content {
+        width: 200px;
+        height: 150px;
+    }
+
+        .modal-static .modal-dialog,
+        .modal-static .modal-content {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+.kanban-col {
+    width: 300px;
+    margin-right: 20px;
+    float: left;
+}
+
+.panel-body {
+    padding: 15px 0 0 0;
+    overflow-y: auto;
+}
+
+
+
+/*.panel-heading {
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+    cursor: grab;
+}*/
+
+.grab {
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.grabbing {
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.panel-heading {
+    cursor: context-menu;
+}
+
+    .panel-heading i {
+        cursor: pointer;
+    }
+
+
+
+
+
+
+body {
+    -webkit-user-select: none; /* Chrome/Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+ */
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+}
+
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.mdl-layout-title.md-light { color: rgba(255, 255, 255, 1); }
+.mdl-layout__header .mdl-layout__drawer-button {
+    position: absolute;
+    color: rgba(255, 255, 255, 1); 
+    background-color: inherit;
+}
+</style>
     </head>
 
-    <body>
+    <body ng-app="myApp" ng-controller="customersCtrl">
 
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
-      mdl-layout--fixed-header" ng-app="myApp" ng-controller="customersCtrl">
+      mdl-layout--fixed-header" >
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
-            mdl-layout--fixed-tabs">
-  <header class="mdl-layout__header">
-  <div class="mdl-layout__header-row">
+            mdl-layout--fixed-tabs ">
+  <header class="mdl-layout__header ">
+  <div class="mdl-layout__header-row md-light">
     <div class="mdl-layout-spacer"></div>
-    <div class="mdl-layout-spacer"><span class="mdl-layout-title">NOTIFICAÇÕES</span></div>
+    <div class="mdl-layout-spacer"><span class="mdl-layout-title md-light">NOTIFICAÇÕES</span></div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
           mdl-textfield--floating-label mdl-textfield--align-right">
     <label class="mdl-button mdl-js-button mdl-button--icon"
          for="fixed-header-drawer-exp">
-      <i class="material-icons">search</i>
+      <i class="material-icons md-light">search</i>
     </label>
     
     <div class="mdl-textfield__expandable-holder">
@@ -75,9 +460,9 @@
     </div>
   </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-      <a href="#fixed-tab-1" class="mdl-layout__tab is-active"><div class="material-icons ">feedback</div></a>
-      <a href="#fixed-tab-2" class="mdl-layout__tab"><div class="material-icons">assessment</div></a>
-      <a href="#fixed-tab-3" class="mdl-layout__tab"><div class="material-icons">settings</div></a>
+      <a href="#fixed-tab-1" class="mdl-layout__tab is-active"><i class="material-icons md-light">feedback</i></a>
+      <a href="#fixed-tab-2" class="mdl-layout__tab"><i class="material-icons md-light">assessment</i></a>
+      <a href="" ng-click="atualizar();" class="mdl-layout__tab"><i class="material-icons md-light">cached</i></a>
     </div> 
   </header>
   
@@ -104,25 +489,31 @@
 
   
 
-  <main class="mdl-layout__content" ng-show="!mostrar">
-  <div class="page-content">
-    <ul class="demo-list-three mdl-list">
-  <li class="mdl-list__item mdl-list__item--three-line" ng-repeat="x in myData">
-    <span class="mdl-list__item-primary-content">
-      <i class="material-icons mdl-list__item-avatar">person</i>
-     <span ng-bind="x.id +' - '+x.campus"></span>
-      <span class="mdl-list__item-text-body">
-        Bryan Cranston played the role of Walter in Breaking Bad. He is also known
-        for playing Hal in Malcom in the Middle.
-      </span>
-    </span>
-    <span class="mdl-list__item-secondary-content">
-      <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons" ng-hide="{{x.id >20}}" >thumb_up</i></a>
-    </span>
-  </li>
+  <main class="mdl-layout__content" ng-show="!mostrar" >
+  
 
-</ul>
+
+
+<div class="container-fluid" >
+        <div id="sortableKanbanBoards" class="row">
+                    <div id="DOING" class="kanban-centered" >
+
+                        <article class="kanban-entry grab" id="item5" draggable="true" ng-repeat="x in myData">
+                            <div class="kanban-entry-inner">
+                                <div class="kanban-label">
+                                    <h1><span >Prof: {{x.usuarioIdusuario}}</span> </h1>
+                                    <h2><a href="{{x.linknotificacao}}" ><span>{{x.titulonotificacao}}</span></a> </h2>
+                                    <p>{{x.descricao}}</p>
+                                </div>
+                                <img class="img-responsive" src="{{x.urlimagem}}"  ng-show="{{x.urlimagem}}">
+                            </div>
+                        </article>
+                    </div>
+         </div>
     </div>
+
+
+
    
   </main>
 
@@ -156,7 +547,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
 </body>
   </html>
         

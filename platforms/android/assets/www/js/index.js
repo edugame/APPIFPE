@@ -34,28 +34,61 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
 
-    window.plugins.PushbotsPlugin.initialize("572672d34a9efaa64e8b4569", {"android":{"sender_id":"587445918557"}});
-    alert(1);
+    
+
+    window.plugins.PushbotsPlugin.initialize("572672d34a9efaa64e8b4569", {"android":{"sender_id":"467151967847"}});
+    //alert(1);
+
+    
     window.plugins.PushbotsPlugin.on("notification:received", function(data){
     var dados =  JSON.stringify(data);
-    var obj = JSON.parse(dados);
-    //alert(obj.url);
     
-   window.location=obj.url;
+    var obj = JSON.parse(dados);
+    //alert(obj.idnotificacao);
+    
+   
+ 
+
 
     });
 
+     window.plugins.PushbotsPlugin.getRegistrationId(function(token){
+        //localStorage.tokken = token;
+        localStorage.setItem('tokken', token);
+     });
+
+
+
 // Should be called once the notification is clicked
     window.plugins.PushbotsPlugin.on("notification:clicked", function(data){
-   var dados =  JSON.stringify(data);
+    var dados =  JSON.stringify(data);
     var obj = JSON.parse(dados);
-    //alert(obj.url);
-    window.location=obj.url;
+    
+    //if(obj.idnotificacao != null){
+        var usuario = localStorage.login;
+            $scope.mostrar = true;
+             $.ajax({
+              url: "http://professornilson.com/mobile/restDAO/notificacao/loadUsuario/" + usuario,
+              type: "get",
+              success: function (dados) {
+                 localStorage.objetos = JSON.stringify(dados);
+                 alert(obj.url);
+              },error: function(response){
+                 console.log(response); 
+              }     
+
+
+          });
+           
+                 
+            location.href='notificacaopush.html?id='+obj.idnotificacao;
+    //}
+    //location.href=obj.url;
     });
    
 
 
-        app.receivedEvent('deviceready');
+    app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -68,6 +101,8 @@ var app = {
 
         console.log('Received Event: ' + id);
     }
+
+    
 };
 
 app.initialize();

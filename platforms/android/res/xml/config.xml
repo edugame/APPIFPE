@@ -12,6 +12,9 @@
     <feature name="Contacts">
         <param name="android-package" value="org.apache.cordova.contacts.ContactManager" />
     </feature>
+    <feature name="InAppBrowser">
+        <param name="android-package" value="org.apache.cordova.inappbrowser.InAppBrowser" />
+    </feature>
     <feature name="PushbotsPlugin">
         <param name="android-package" value="com.pushbots.plugin.PushbotsPlugin" />
     </feature>
@@ -31,6 +34,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <icon density="ldpi" height="32" platform="android" src="www/image/favicon-32x32.png" width="32" />
     <icon density="ldpi" height="36" platform="android" src="www/image/ifpe.png" width="36" />
     <icon density="mdpi" height="48" platform="android" src="www/image/ifpe (1).png" width="48" />
     <icon density="hdpi" height="72" platform="android" src="www/image/ifpe (2).png" width="72" />

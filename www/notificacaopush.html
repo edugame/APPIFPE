@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+       <head>
+
+         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+      <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.green-light_green.min.css" />
+      <link rel="stylesheet" href="css/geral.css" />
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+
+      <script src="material/material.min.js"></script>
+    
+
+<script >//<![CDATA[
+
+    
+   
+
+       
+    var app = angular.module('myApp', []);
+    app.controller('notificacoesCtrl', function ($scope, $http) {
+        
+        $scope.words = window.location.href;
+        $scope.idurl = $scope.words.split("id=");
+       
+        var usuario = localStorage.login;
+
+            $http.get('http://professornilson.com/mobile/restDAO/notificacao/loadUsuario/' + usuario).success(function (dados) {
+                localStorage.objetos = JSON.stringify(dados);
+                $scope.myData = dados;
+                $scope.mostrar = false;
+            }).error(function (dados) {
+                console.log(2);
+            });
+
+
+          $.ajax({
+              url: "http://www.professornilson.com/mobile/PaginaWeb/Token/cadastrarnotificacaolida.php",
+              type: "post",
+              data: { 
+                 idnotificacao: $scope.idurl[1], 
+                 idaluno: localStorage.login
+              },success: function (response) {
+                  console.log('atualizacao realizada com sucesso ');                
+              },error: function(response){
+                 console.log(response); 
+              }     
+
+
+          });
+
+           $scope.retornar = function () {
+            var usuario = localStorage.login;
+            $scope.mostrar = true;
+            $http.get('http://professornilson.com/mobile/restDAO/notificacao/loadUsuario/' + usuario).success(function (dados) {
+                localStorage.objetos = JSON.stringify(dados);
+                window.location = "inicialnovo.html";
+            }).error(function (dados) {
+                console.log(2);
+            });
+
+       
+           
+
+
+        };
+   
+
+});
+
+
+
+        </script> 
+
+    </head>
+
+
+    <body  ng-app="myApp" ng-controller="notificacoesCtrl">
+       <div class="row "> 
+     
+  
+<!--INÍCIO DO MODAL -->
+  <dialog class="mdl-dialog">
+    <h6 class="mdl-dialog__actions" ng-show="mensagem">Usuário Cadastrado com Sucesso</h6>
+    <h6 class="mdl-dialog__actions" ng-show="!mensagem">Matrícula Inválida</h6>
+    
+    <div class="mdl-dialog__actions">
+      
+      <button type="button" ng-click="fechar();" class="mdl-button close">Ok</button>
+    </div>
+  </dialog>
+  <!--FIM DO MODAL -->
+  
+ 
+
+<nav class="green darken">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center" style="font-size: 20px;">Objeto de Aprendizagem</a>
+      
+        <a href="#" ng-click="retornar();"><i class="material-icons" style=" padding-left: 10px;">arrow_back</i></a>
+       
+     
+    </div>
+  </nav>
+
+
+    </div>
+    <div class="container" ng-repeat="x in myData | filter:{idnotificacao:idurl[1]}">
+   <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{{x.urlimagem}}" ng-show="{{x.urlimagem != null}}">
+    </div>
+    <div class="card-content">
+      <div class="author">
+                        Prof. <b>{{x.usuarioIdusuario}}</b> |
+                        <time datetime="2014-01-20">postado em {{x.data}}</time>
+                    </div><br> <div class="author">
+                        {{x.descricaodisciplina}}
+                    </div><br>
+      <p style="text-align : justify;">{{x.descricao}}</p>
+      <br>
+      <div>
+                        <a href="{{x.linknotificacao}}" class="btn btn-primary btn-sm" ng-show="{{x.linknotificacao != null}}">Acessar Site Externo</a>
+                    </div>
+    </div>
+    
+  </div>
+  </div>
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+      <script type="text/javascript" src="cordova.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
+      
+
+     
+
+    </body>
+</html>
+

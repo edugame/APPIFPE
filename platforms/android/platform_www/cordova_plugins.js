@@ -80,6 +80,14 @@ module.exports = [
         "merges": [
             ""
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+        "id": "cordova-plugin-inappbrowser.inappbrowser",
+        "clobbers": [
+            "cordova.InAppBrowser.open",
+            "window.open"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -90,7 +98,8 @@ module.exports.metadata =
     "pushbots-cordova-plugin": "1.3.6",
     "cordova-plugin-splashscreen": "3.2.2",
     "cordova-plugin-compat": "1.0.0",
-    "cordova-plugin-contacts": "2.1.0"
+    "cordova-plugin-contacts": "2.1.0",
+    "cordova-plugin-inappbrowser": "1.6.2-dev"
 };
 // BOTTOM OF METADATA
 });

@@ -9,8 +9,9 @@
       <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.green-light_green.min.css" />
       <link rel="stylesheet" href="css/geral.css" />
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+      
+      
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 
@@ -22,29 +23,52 @@
 
 
 
-         if (localStorage.login == 1) {
+         if(localStorage.login>= 1 && localStorage.login <=5000){
               
-                 window.location = "inicial.html";
+                 window.location = "inicialnovo.html";
          }    
 
        // * FUNÇÃO PARA EFETUAR LOGIN * //
         $scope.logar = function(){
+          
+       	 $.ajax({
+              url: "http://www.professornilson.com/mobile/Token/login.php",
+              type: "post",
+              data: { 
+                 login: $('#login').val(), 
+                 senha: $('#senha').val()
+                    },
+               success: function (response) {
 
-           
+                    if(localStorage.ultimousuario != response){
+                       localStorage.objetos = null;
+                       localStorage.feedback = null;
+                       localStorage.disciplina = null;
+                    }
+
+                    if(response >= 1 && response <=5000 ){
+                    	 localStorage.login = response;
+                       localStorage.ultimousuario = response;
+                    	 
+                    	 window.location = "index.html";
+                    }else{
+                    	dialog.showModal();
+                    }
+                  
+                 
+                 }     
+                 
+
+
+          });    
     
-       if(document.getElementById("login").value == "123" ){
-     
-             if (localStorage.login != 1) {
-                
-               
-                 localStorage.login = 1;
-                 window.location = "inicial.html";
-             }
-
-        }else{
-           document.getElementById("login").value = "";
-        }
+       
        }
+
+        $scope.fechardialog = function(){
+                dialog.close();
+
+        }
 
         $scope.sair = function(){
 
@@ -54,6 +78,8 @@
 
 
         });
+
+
         </script> 
 
 
@@ -61,51 +87,70 @@
 
     </head>
 
-    <body ng-app="myApp" ng-controller="customersCtrl">
+    <body ng-app="myApp" ng-controller="customersCtrl" class="borda">
 
 
-<div class="row">
-<div class="demo-card-image mdl-card mdl-shadow--2dp">
-  <div class="mdl-card__title mdl-card--expand"></div>
-  <div class="mdl-card__actions">
-    <span class="demo-card-image__filename"></span>
-  </div>
-</div>
-    <form class="col s12">
+<div class="z-depth-1 grey lighten-4 row" style="  border: 1px solid #EEE; width: 100%; margin-right: 10px">
+
+    <form class="col s12 " >
+    <br>
+    <div class="row" >
+          <div class="input-field col s12 center">
+            <img src="image/logopequeno.png" alt="" class="circle responsive-img valign profile-image-login">
+            
+          </div>
+        </div>
     <div class="row">
         <div class="input-field col s12">
-          <input id="login" type="text" class="validate">
+          <input id="login" name="login" type="text" class="validate">
           <label for="login">Login</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="senha" type="password" class="validate">
+          <input id="senha" name="senha" type="password" class="validate">
           <label for="senha">Senha</label>
         </div>
       </div>
       
-      <div class="row">
-        <div class="input-field col s12">
-       <a class="mdl-button mdl-button--raised"  ng-click="logar();" style="text-decoration:none;width:100%">Entrar</a>
+       <div class="row" >
+          <div class="input-field col s12" >
+            <a  ng-click="logar();" class="btn waves-effect waves-light col s12 dialog-button" style="background-color:#4CAF50" >Entrar</a>
+          </div>
         </div>
-      </div>
-        
-        <div class="row">
-        <div class="input-field col s12">
-       <a class="mdl-button mdl-button--raised" href="cadastro.html" style="text-decoration:none;width:100%">Cadastre-se</a>
 
-       </div>
+        <div class="row" >
+          <div class="input-field col s12" >
+            <a  href="cadastro.html" class="btn waves-effect waves-light col s12" style="background-color:#4CAF50" >Cadastre-se</a>
+          </div>
+        </div>
+        
+        <dialog id="dialog" class="mdl-dialog">
+
+          <div class="mdl-dialog__content">
+             <p>
+               Login ou Senha Inválidos
+             </p>
+          </div>
+          <div class="mdl-dialog__actions">
+              <button type="button" class="mdl-button" ng-click="fechardialog();">Fechar</button>
+          </div>
+         </dialog>
+
 
     </form>
   </div>
+
+  
 
 
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
+      <script type="text/javascript" src="js/index.js"></script>
+      
+       
 </body>
   </html>
         
