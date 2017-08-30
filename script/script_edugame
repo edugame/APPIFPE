@@ -1,0 +1,1042 @@
+CREATE DATABASE edugame;
+
+CREATE TABLE alternativa (
+  id_alternativa INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_pergunta INTEGER UNSIGNED NOT NULL,
+  descricao VARCHAR(255) NOT NULL,
+  correta BIT NULL,
+  PRIMARY KEY(id_alternativa)
+);
+
+CREATE TABLE assunto (
+  id_assunto INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id_disciplina INTEGER UNSIGNED NOT NULL,
+  descricao VARCHAR(255) NOT NULL,
+  PRIMARY KEY(id_assunto)
+);
+
+
+CREATE TABLE pergunta (
+  id_pergunta INTEGER UNSIGNED NOT NULL,
+  descricao VARCHAR(255) NOT NULL,
+  id_tipo_pergunta INTEGER UNSIGNED NOT NULL,
+  id_assunto INTEGER UNSIGNED NOT NULL,
+  id_usuario INTEGER UNSIGNED NOT NULL,
+  dia DATE NOT NULL,
+  PRIMARY KEY(id_pergunta)
+);
+
+CREATE TABLE tipo_pergunta (
+  id_tipo_pergunta INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  descricao VARCHAR(255) NOT NULL,
+  PRIMARY KEY(id_tipo_pergunta)
+);
+
+ALTER TABLE alternativa ADD CONSTRAINT fk_pergunta
+    FOREIGN KEY(id_pergunta) REFERENCES pergunta(id_pergunta);
+
+ALTER TABLE pergunta ADD CONSTRAINT fk_assunto
+    FOREIGN KEY(id_assunto) REFERENCES assunto(id_assunto);
+
+ALTER TABLE pergunta ADD CONSTRAINT fk_tipo_pergunta
+    FOREIGN KEY(id_tipo_pergunta) REFERENCES tipo_pergunta(id_tipo_pergunta);
+
+CREATE TABLE `aluno` (
+  `idaluno` int(10) UNSIGNED NOT NULL,
+  `matricula` varchar(20) NOT NULL,
+  `token` varchar(200) DEFAULT NULL,
+  `nomealuno` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `urlimagem` varchar(200) DEFAULT NULL,
+  `senha` varchar(80) DEFAULT NULL,
+  `alunoativo` int(1) UNSIGNED DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `aluno` (`idaluno`, `matricula`, `token`, `nomealuno`, `email`, `urlimagem`, `senha`, `alunoativo`) VALUES
+(1, '20161TIJG0454', 'APA91bFJ8C2KPCqu1RZBmv7bvdqf4s8lGWZLpNkIgZFCdys_ZzPuKca5j2Cvl0bf84pcZmrsgSe6OGMf5bRlF1Z3OtrmBFgusbpuAtgM0Or9M6okWWXNthDOMK0dOZ-cE1bxUIxLka0f', 'Adonias José Mauro da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(2, '20162TIJG0065', 'Web', 'Alana Viana Borges da Silva Néo', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(3, '20162TIJG0057', NULL, 'Alberto Luiz Maciel', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(4, '20152TIJG0377', NULL, 'Alesson Francisco da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(5, '20152TIJG0199', NULL, 'Alisson Jonathan do Nascimento', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(6, '20161TIJG0020', NULL, 'Amanda Rayane Marques', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(7, '20161TIJG0322', NULL, 'Amauri Ferreira dos Anjos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(8, '20162TIJG0715', NULL, 'Amaury de Freitas Costa', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(9, '20142TIJG0689', NULL, 'Ana Alice Teixeira Lima', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(10, '20162TIJG0049', NULL, 'Ana Tereza da Silva Uchoa', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(11, '20151TIJG0359', NULL, 'Anderson Paixao da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(12, '20152TIJG0369', NULL, 'Andre Luiz Ferreira da Trindade', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(13, '20152TIJG0300', NULL, 'Ariane Kessia Mesquita Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(14, '20152TIJG0482', NULL, 'Armando Cassena Asser e Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(15, '20162TIJG0286', NULL, 'Arthu Gomes Ramos Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(16, '20142TIJG0050', NULL, 'Bartolomeu Nunes Filho', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(17, '20162TIJG0405', NULL, 'Bruna de Figueiroa Faria Obirio', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(18, '20162TIJG0731', NULL, 'Bruno da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(19, '20151TIJG0553', 'APA91bFUMZCryfC3acAzYjssJ56JhylZNo2nfBEfGwvMivXxqdBPAiL_zd8laWsOxXDt_6eC7yYBYGnr3IMtuO7yRo-l1pjOdsHVGFf_AS6NukDNbfDCOMubBejuIr9c7TMxkxikY_z-', 'Bruno Gustavo Nascimento e Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '3a9fadc5df7ac98720b71a940030af99', 1),
+(20, '20162TIJG0650', NULL, 'Bruno Helder Claudino de Barros', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(21, '20162TIJG0340', NULL, 'Bruno Henrique de Souza Santiago', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(22, '20152TIJG0628', NULL, 'Bruno Ricardo de Oliveira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(23, '20161TIJG0543', 'Web', 'Cairo Sousa e Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '10969b0e59ccf3386057e885e7ad31a5', 1),
+(24, '20162TIJG0480', NULL, 'Camila Máximo Medeiros', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(25, '20162TIJG0499', NULL, 'Carlos Felipe Gomes Alves', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(26, '20151TIJG0596', NULL, 'Carolynne Victória de Arruda Muniz', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(27, '20152TIJG0024', NULL, 'Daivson de Azevedo Luiz', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(28, '20162TIJG0456', NULL, 'Daniel José de Lima', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(29, '20161TIJG0578', NULL, 'Daniel Ramos da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(30, '20161TIJG0187', NULL, 'Daniele Barbosa de Souza', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(31, '20162TIJG0588', NULL, 'Daniele Maria da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(32, '20161TIJG0667', NULL, 'Danielle Ferreira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(33, '20161TIJG0381', NULL, 'Dayane Suellen Santos de Paula', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(35, '20162TIJG0685', NULL, 'Deivson Monteiro do Nascimento', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(36, '20151TIJG0308', NULL, 'Demetryus Ricardo da Silva Oliveira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(37, '20162TIJG0537', NULL, 'Denice Trindade da Silva Alves', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(38, '20161TIJG0535', NULL, 'Dimas Rafael Ferreira Costa', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(39, '20162TIJG0677', NULL, 'Edilania Maria Bezerra', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(40, '20162TIJG0669', NULL, 'Edilson Jose da Paz', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(41, '20162TIJG0243', NULL, 'Edmarcos de Lima Almeida', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(42, '20162TIJG0022', NULL, 'Eduardo Felipe Ribeiro da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(43, '20162TIJG0723', NULL, 'Edvânia Maria de Santana', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(44, '20142TIJG0107', 'APA91bE7nHRK3jT8qTHynuhfxqI9wpYFO6GPTuFSueVO_uwioAQZ5qkyYMCBmB78_9Z43VrmMqOZYIf0S_66mxdFW9vHVeuDEAXwRV32_T3Oza4XG-Z4dBg7s6RzVsIEp7ioNoBN4Ln7', 'Ellem Diana Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '2d4f1f30b37baf1473d1cd8f88623253', 1),
+(45, '20162TIJG0090', NULL, 'Emerson Lourenço de Almeida', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(46, '20152TIJG0695', NULL, 'Emerson Silva de Paula', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(47, '20162TIJG0618', NULL, 'Enoque Jose da Silva Pereira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(48, '20162TIJG0570', NULL, 'Erivaldo de Lima da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(49, '20162TIJG0294', NULL, 'Erividiane Ferreira do Espirito Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(50, '20152TIJG0725', NULL, 'Estevao Vitorino da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(51, '20152TIJG0431', NULL, 'Ewerton Luis Santos da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(52, '20162TIJG0120', NULL, 'Fernanda Patricia Rufino Maciel', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(53, '20162TIJG0707', NULL, 'Fernando Sabino Cardoso Rodrigues', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(54, '20161TIJG0519', NULL, 'Gabriel Alexandre de Souza', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(55, '20161TIJG0055', NULL, 'Gabriel Philipe Costa e Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(56, '20162TIJG0740', NULL, 'Gabriel Victor Ferreira de Melo Peçanha', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(57, '20162TIJG0367', NULL, 'Geison Figueiredo Barboza dos Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(58, '20161TIJG0403', NULL, 'Germana Rafaela Souza da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(59, '20161TIJG0659', 'APA91bHr0sIPFveNZ0Z96vsDQo3rly3ZjVBF7gDvc7yvHKvEvDn8SbmBV72dgYD1z76kdUHq9sPIvTlzzyZSCJkRBz2oFMJyqXdY3LAheY0lPgaJ1C4zuBYXiiyRF2a3uZo7IutMSxyv', 'Gilmar Rodrigues dos Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'b5481e32680f30f32bd11e8d72436561', 1),
+(60, '20151TIJG0251', NULL, 'Gilson Lourenço de Oliveira Júnior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(61, '20152TIJG0229', NULL, 'Gisele Basilio do Nascimento Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(62, '20162TIJG0014', NULL, 'Gleibson Freitas de Lima', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(63, '20161TIJG0136', NULL, 'Guilherme Antonio da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(64, '20162TIJG0081', NULL, 'Henrique Caetano de Barros', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(65, '20161TIJG0420', 'APA91bGeeGraIDmjue1V14xzNr1nnbyBK86PYLnNDB1P8xhhd4_g_OYB37MJotMoCuKIW0nuEa9ekrIpP_8ErLwddXQZNMwIhJ9gzrN8PdKEUivGL2QG60ZtQpyEyM6iSyTNO36R2rn-', 'Hewerton Elias da Silva Angelo', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'dce0d50e26c44ab4bb46707306acfad9', 1),
+(66, '20161TIJG0608', NULL, 'Itamar Francisco de Oliveira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(67, '20162TIJG0464', NULL, 'Ivancler Bezerra Cabral Júnior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(68, '20142TIJG0654', NULL, 'Ivanildo José Ramos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(69, '20161TIJG0470', NULL, 'Jabne Lima de Oliveira Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(70, '20161TIJG0225', NULL, 'Jacilene de Lima Ferreira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(71, '20152TIJG0261', NULL, 'Jaildes Marcia da Silva Farias', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(72, '20162TIJG0030', NULL, 'Jardel Mendonça da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(73, '20162TIJG0332', NULL, 'Jarlene Alves de Bragança', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(74, '20162TIJG0316', NULL, 'Jessica da Silva Monteiro Estevam', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(75, '20152TIJG0326', NULL, 'Jhon Marley Nascimento Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(76, '20161TIJG0241', NULL, 'Joao Victor Carneiro da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(77, '20152TIJG0474', 'APA91bHZzq3qSzIvwLg37XxK_9in8jVV_Q4glTJuKFUjAVlVyxBajSsGx7CumQSOdjgfL3GgCqzlyldvJsXjgr4mgf9jG6kEXHdC9Xc0cG0Q2PKGQw-nWbnj60RPfuPPIOADmTRjoJb9', 'Jobson Raphael da Silva Ferreira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(78, '20162TIJG0448', NULL, 'Johnnys Adson Rodrigues da Silva Martins', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(79, '20161TIJG0233', NULL, 'Jonas dos Santos Andrade', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(80, '20152TIJG0601', 'APA91bHDuiloB7r5EF_MfDjE9ZL_qKJedG-nofEuMOvlU9Ii0_37QUIRhSTmMiJrQlSAEnry7GYBMYS6MCJjaNpk5gNbUg8q1-KKBNGPiN8cNhb505C_W-BSbssqNOY0x_MMiSjCCPUv', 'Jonhnata Felix de Barros', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'd775b00a1e6449192a9b214f6e7a57d8', 1),
+(81, '20152TIJG0423', 'APA91bHMvogXoPwGCWl-BSoExh4IPMtsVhy2g3_kiY0pGn7U5KEa-zTzAeO8VsE4zTCjV8B9mzIevkgCfnwtjmOz3CjGDyVJIySND4jT2085qhQ5VLmBxI4IIl16MHsMB4Q7hVbqvJ0E', 'Joran Manoel Santos da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e6beccf2c2157ef0f1e9a4ab16e12bde', 1),
+(82, '20161TIJG0373', NULL, 'Jorge Luiz Olimpioda Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(84, '20142TIJG0760', NULL, 'José Renato Maciel Wanderley', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(85, '20152TIJG0296', NULL, 'Jose Samuel da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(86, '20162TIJG0472', NULL, 'Josemario Barbosa Pereira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(87, '20151TIJG0154', NULL, 'Juliane M aria da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(88, '20162TIJG0553', NULL, 'Kevin Teixeira de Lima', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(89, '20151TIJG0189', NULL, 'Lays de Souza Lima', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(90, '20161TIJG0012', NULL, 'Leandro Siqueira Rodrigues', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(91, '20162TIJG0189', NULL, 'Leonardo Vasconcelo da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(92, '20152TIJG0580', NULL, 'Leonilson Eduardo da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(93, '20152TIJG0105', NULL, 'Levi Monteiro Xavier Junior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(94, '20162TIJG0103', NULL, 'Lucas Bessa Nascimento de Medeiros', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(95, '20162TIJG0529', NULL, 'Lucas Felipe Silva dos Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(96, '20151TIJG0561', NULL, 'Lucas Santana Ferreira de Sena', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(97, '20152TIJG0466', NULL, 'Luiz Augusto Silva de Mendonca', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(98, '20152TIJG0350', NULL, 'Luiz Carlos Jose da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(99, '20161TIJG0179', NULL, 'Marcio Fernandes de Oliveira Filho', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(100, '20161TIJG0101', NULL, 'Marcone Alberto da Silva Junior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(101, '20161TIJG0268', NULL, 'Mayara Lorenna Correia de Farias', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(102, '20162TIJG0626', NULL, 'Manoel Joaquim da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(103, '20151TIJG0146', NULL, 'Marcelo Romão de Amorim Filho', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(104, '20162TIJG0375', NULL, 'Marcio Carlos Pereira de Oliveira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(105, '20161TIJG0179', NULL, 'Marcio Fernandes de Oliveira Filho', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(106, '20161TIJG0101', NULL, 'Marcone Alberto da Silva Junior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(107, '20162TIJG0502', NULL, 'Maria Cristina Pereira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(108, '20151TIJG0480', NULL, 'Maria Eduarda de Lima Pereira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(109, '20161TIJG0071', NULL, 'Maria Jaciane Conceiçaõ Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(110, '20162TIJG0308', NULL, 'Maria Luiza da Conceição Bezerra de Souza', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(111, '20162TIJG0251', NULL, 'Marilia Graziele da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(112, '20151TIJG0120', 'Web', 'Marivaldo Bruno Pereira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '2b1d03e674299098962174188c20228a', 1),
+(113, '20162TIJG0642', NULL, 'Matheus Henrique Nascimento da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(114, '20152TIJG0504', 'APA91bHYxWhV5jSbWWLyyl3XQb5tI9fM7Uw6rIZKowdAgZrziDBc85lQ4jth8gZzYJzH6emyHtRMO4vUurqU-n49J1reuX7Pw1LiJq2UZnNdV2R8p5v8glG9AcJhxMAkToTDqe6c63BR', 'Maxwell Michel Siqueira Melo de Lima Araujo', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(115, '20162TIJG0634', NULL, 'Mikele Guedes Alves de Souza', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(117, '20162TIJG0278', NULL, 'Monise Cândido da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(118, '20152TIJG0547', NULL, 'Myllena Matias da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(119, '20151TIJG0383', NULL, 'Natalia Raquel Oliveira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(120, '20162TIJG0693', NULL, 'Nicolau Uiran de Melo Barbosa', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(121, '20162TIJG0197', NULL, 'Oséias Ferreira da Silva Sobrinho', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(122, '20152TIJG0555', NULL, 'Otaviano Tome Marques da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(123, '20151TIJG0073', NULL, 'Paulo Henrique Brito de Santana', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(124, '20152TIJG0040', NULL, 'Pedro Henrique da Silva Couto', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(125, '20162TIJG0219', NULL, 'Paola Francine Zanandreia', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(126, '20162TIJG0359', NULL, 'Paulo Rodrigues da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(127, '20152TIJG0040', NULL, 'Pedro Henrique da Silva Couto', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(128, '20151TIJG0081', NULL, 'Pedro Henrique Santos Pereira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(129, '20162TIJG0430', NULL, 'Pedro Lima Cardozo do Nascimento', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(130, '20162TIJG0073', NULL, 'Priscila Pedroza da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(131, '20152TIJG0717', NULL, 'Rafael Araujo da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(133, '20162TIJG0600', NULL, 'Rafaela Silva Nascimento', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(134, '20162TIJG0596', NULL, 'Raiane Evellen Alves da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(135, '20152TIJG0334', NULL, 'Rebeca Priscila da Silva Ferreira', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(136, '20162TIJG0383', NULL, 'Richardson Bruno da Silva Andrade', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(137, '20151TIJG0391', NULL, 'Roberto Santana Nogueira Junior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(138, '20162TIJG0235', NULL, 'Rodrigo Xavier Coelho', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(139, '20152TIJG0539', NULL, 'Romildo Alves de Lima Junior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(141, '20152TIJG0385', NULL, 'Samuel Camilo do Nascimento Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(142, '20161TIJG0616', NULL, 'Tamara Micaela da Rocha', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(143, '20152TIJG0644', 'APA91bHY3rEqrgj5BX74TspDImDqItp5bgKMJhHjQ3QDGpbsiE5J35m8_GgLn1KTp007mczNO9FbjeEdTaSdH47JsCmswuqqIhMKvjuab5FSff2zIJayjZj45NkY2hXE5On7dcZ4meNq', 'Thayane Pereira Lopes da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '03a8830b1b21d251a12c6d773b08d939', 1),
+(144, '20162TIJG0170', NULL, 'Thiago de Freitas Souza', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(145, '20151TIJG0049', NULL, 'Thiago de Sousa Freire', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(146, '20161TIJG0632', NULL, 'Thiago Rafael de Silva Santana', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(147, '20152TIJG0660', NULL, 'Tiago Borges Herminio da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(148, '20151TIJG0022', NULL, 'Valdenize Maria Luna de Abreu', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(149, '20161TIJG0047', NULL, 'Vandembergue Bezerra Rodrigues', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(150, '20152TIJG0253', NULL, 'Vicente Vinicius Rodrigues Cunha', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(151, '20142TIJG0514', NULL, 'Victor Pereira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(152, '20162TIJG0561', NULL, 'Victor Rafael de Santana', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(153, '20162TIJG0154', NULL, 'Vinícius Lucas de Santana', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(154, '20142TIJG0778', NULL, 'Viviane Gomes Bezerra de Azevedo', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(155, '20162TIJG0510', NULL, 'Walteann Costa da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(156, '20152TIJG0610', NULL, 'Wellington Jose da Costa', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(157, '20162TIJG0545', NULL, 'Wesley Dayvidson Barros da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(158, '20161TIJG0560', NULL, 'Wildici Lins de Souza Araújo', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(159, '20161TIJG0276', 'APA91bGf1QP8Ycawb4II3aoRGngx8oaq2ac_qBGXqJ_vAMfA94o7B8qqBFS1bgSbLqX8sC5peusx2CzbqH24524umMCJlzT5sIqhV3nAFcN-OKwtP97hQgJebCFyYADskqKprs8shU7Z', 'William Roberto Andrade da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(160, '20162TIJG0758', 'APA91bF3PU9zWFucBtk72sHVQNqO5ytab1GpAsWxzovcuPqbFfaqadYFFNbiNeDZRz6kZykSY15BdXsCzz-bf12_i0F7CI5HFWPZLxhmLuiQlYp_Dm9rCfirtZES8ik2w5WMFAQx0unJ', 'Yuri Ferreira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e10adc3949ba59abbe56e057f20f883e', 1),
+(161, '20162TIJG0391', NULL, 'Yuri Lacerda Rodrigues', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, 0),
+(162, '20161TIJG0152\r\n', NULL, 'Ellyonan Jhonatan Ferreira da Silva', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, NULL),
+(163, '20151TIJG0472\r\n', NULL, 'Vlademir Felix de Melo Junior', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', NULL, NULL),
+(1366, '20152TIJG0415', 'APA91bFQfJRbLxIzWDRigxw6KJaJHQr3mfMbKrP6hwPqIfGhDgp0K7WvLcIXLBC-qJOSNv7K9-bDdVRy9spTO-r4yHiXML5pL8Lkwsu3P9r5whUgr2Lmxdo3U5adXDQQSQMJJCo4ea__', 'Rennan Maxi de Oliveira Santos', '', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'b7a4aa8a35fbe17d8163bf3421e00512', 1),
+(165, '20161TIJG0420', 'APA91bGeeGraIDmjue1V14xzNr1nnbyBK86PYLnNDB1P8xhhd4_g_OYB37MJotMoCuKIW0nuEa9ekrIpP_8ErLwddXQZNMwIhJ9gzrN8PdKEUivGL2QG60ZtQpyEyM6iSyTNO36R2rn-', 'Hewerton Elias da Silva Angelo', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'dce0d50e26c44ab4bb46707306acfad9', 1),
+(166, '20152TIJG0423', 'APA91bHMvogXoPwGCWl-BSoExh4IPMtsVhy2g3_kiY0pGn7U5KEa-zTzAeO8VsE4zTCjV8B9mzIevkgCfnwtjmOz3CjGDyVJIySND4jT2085qhQ5VLmBxI4IIl16MHsMB4Q7hVbqvJ0E', 'Joran Manoel Santos da Silva', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'e6beccf2c2157ef0f1e9a4ab16e12bde', 1),
+(167, '20161TIJG0284', 'Web', 'José Alberto de Oliveira Girão Filho', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '0f4137ed1502b5045d6083aa258b5c42', 1),
+(169, '20161TIJG0314', 'Web', 'Moisés de Souza Lins', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'dd8a919b00b30ea9bdcffdfc1b3c5370', 1),
+(170, '20142TIJG0808', 'APA91bHCwauJTX6epdTDrhibtvy9YULGjloxGspjW2o3InOZKP6BeH4MLarTRIG1T9aWZ8a31akW8waIWSKxyXoLg5Uiak91iaDqiFmmQB0H7Z7f4-_A2Ig44ICSkSVgKI60dr09JG3u', 'Rafael da Silva', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '349f8e8088df63050757dd8be4356216', 1),
+(171, '20161TIJG0489', 'Web', 'Ruggery Douglas Alves Gusmao', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'dd7757c42bcd4782acd7ea296fa5a468', 1),
+(172, '20152TIJG0148', 'APA91bHQ1nfQbn8LNEAYcxkalDzzMQiF4plgCxgHK6jFQhKdm55vIwbp77FDUrbTuRFrVT_8eKYJ84PEKnkwL6eO6bQnhiEXfOdoCj6a6WCOIknakl8HjEaAFMQQNTpf3uarLpDrzH_I', 'Barbaha Maria Santos da Silva', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '9923ab4f26824345d6c79c30cd879e1d', 1),
+(173, '20151TIJG0553', 'APA91bFUMZCryfC3acAzYjssJ56JhylZNo2nfBEfGwvMivXxqdBPAiL_zd8laWsOxXDt_6eC7yYBYGnr3IMtuO7yRo-l1pjOdsHVGFf_AS6NukDNbfDCOMubBejuIr9c7TMxkxikY_z-', 'Bruno Gustavo Nascimento e Silva', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '3a9fadc5df7ac98720b71a940030af99', 1),
+(174, '20142TIJG0620', 'Web', 'Dayanne Helen Vidal Gomes da Silva', ' ', 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '857c15f7f822da9f0ab96c2ee645734d', 1),
+(175, '20142TIJG0107', 'APA91bE7nHRK3jT8qTHynuhfxqI9wpYFO6GPTuFSueVO_uwioAQZ5qkyYMCBmB78_9Z43VrmMqOZYIf0S_66mxdFW9vHVeuDEAXwRV32_T3Oza4XG-Z4dBg7s6RzVsIEp7ioNoBN4Ln7', 'Ellem Diana Silva', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '2d4f1f30b37baf1473d1cd8f88623253', 1),
+(176, '20142TIJG0123', 'APA91bGXKYxp13mgmf6yTk2IDMk9BK57wntiJIYe2noayPfLIneVriEvZnj6ZG_WvOScKzlHMb6Yq8AGxP73lU2MZRHImrSVdTzmUIMHxkZsmKlZu1f1sZz_6r3PTUyUGJj_oq1AFSZ4', 'Eveline Luciana Pereira dos Santos', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '34ed7f0f48690fe4a13369e39543db8e', 1),
+(177, '20161TIJG0659', 'APA91bHr0sIPFveNZ0Z96vsDQo3rly3ZjVBF7gDvc7yvHKvEvDn8SbmBV72dgYD1z76kdUHq9sPIvTlzzyZSCJkRBz2oFMJyqXdY3LAheY0lPgaJ1C4zuBYXiiyRF2a3uZo7IutMSxyv', 'GILMAR RODRIGUES DOS SANTOS', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', 'b5481e32680f30f32bd11e8d72436561', 1),
+(178, '20142TIJG0654', NULL, 'Ivanildo José Ramos', NULL, NULL, NULL, 0),
+(179, '20161TIJG0233', NULL, '	Jonas dos Santos Andrade', NULL, NULL, NULL, 0),
+(180, '20151TIJG0120', 'Web', 'MARIVALDO BRUNO PEREIRA DA SILVA', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '2b1d03e674299098962174188c20228a', 1),
+(181, '20152TIJG0644', 'APA91bHY3rEqrgj5BX74TspDImDqItp5bgKMJhHjQ3QDGpbsiE5J35m8_GgLn1KTp007mczNO9FbjeEdTaSdH47JsCmswuqqIhMKvjuab5FSff2zIJayjZj45NkY2hXE5On7dcZ4meNq', 'Thayane Pereira Lopes da Silva', NULL, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg', '03a8830b1b21d251a12c6d773b08d939', 1);
+
+
+CREATE TABLE `aluno_disciplina` (
+  `disciplina_iddisciplina` int(10) UNSIGNED NOT NULL,
+  `aluno_idaluno` int(10) UNSIGNED NOT NULL,
+  `idalunodisciplina` int(10) UNSIGNED NOT NULL,
+  `disciplinaativo` int(1) UNSIGNED DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `aluno_disciplina` (`disciplina_iddisciplina`, `aluno_idaluno`, `idalunodisciplina`, `disciplinaativo`) VALUES
+(4, 23, 1, 1),
+(4, 165, 2, 1),
+(4, 166, 3, 1),
+(4, 167, 4, 1),
+(4, 169, 5, 1),
+(4, 170, 6, 1),
+(4, 171, 7, 1),
+(4, 172, 8, 1),
+(4, 173, 9, 1),
+(4, 174, 10, 1),
+(4, 175, 11, 1),
+(4, 176, 12, 1),
+(4, 177, 13, 1),
+(4, 178, 14, 1),
+(4, 179, 15, 1),
+(4, 181, 17, 1),
+(4, 34, 18, 1),
+(4, 1, 19, 1),
+(4, 180, 80, 1);
+
+
+
+CREATE TABLE `aluno_turma` (
+  `idalunoturma` int(11) NOT NULL,
+  `aluno_idaluno` int(11) NOT NULL,
+  `turma_idturma` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+
+
+INSERT INTO `aluno_turma` (`idalunoturma`, `aluno_idaluno`, `turma_idturma`) VALUES
+(1, 1, 3),
+(2, 23, 6),
+(3, 165, 6),
+(4, 166, 6),
+(5, 167, 6),
+(6, 169, 6),
+(7, 170, 6),
+(8, 171, 6),
+(9, 172, 3),
+(10, 173, 3),
+(11, 174, 3),
+(12, 175, 3),
+(13, 176, 3),
+(14, 177, 3),
+(15, 178, 3),
+(16, 179, 3),
+(17, 180, 3),
+(18, 181, 3),
+(19, 1, 6);
+
+
+CREATE TABLE `atividade` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(500) NOT NULL,
+  `data` datetime NOT NULL,
+  `semestre_idsemestre` int(11) NOT NULL,
+  `idtipoatividade` int(11) NOT NULL,
+  `idusuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `atividade` (`id`, `nome`, `data`, `semestre_idsemestre`, `idtipoatividade`, `idusuario`) VALUES
+(1, 'QUIZ - Requisitos', '2017-06-01 18:34:00', 1, 0, 10),
+(2, 'QUIZ - XP', '2017-05-25 19:00:00', 1, 0, 10),
+(3, 'QUIZ - Requisitos', '2017-06-08 09:00:00', 1, 0, 10),
+(4, 'QUIZ- Conceitos de Engenharia de Software NOITE', '2017-05-11 00:00:00', 1, 1, 10),
+(5, 'QUIZ- Processos de Software NOITE', '2017-05-23 00:00:00', 1, 1, 10),
+(6, 'QUIZ - Extreme Programming NOITE', '2017-05-25 00:00:00', 1, 1, 10),
+(7, 'QUIZ - Conceitos de Engenharia de Software TARDE', '2017-05-11 00:00:00', 1, 1, 10),
+(9, 'QUIZ - Conceitos de Processos de Software TARDE', '2017-05-23 00:00:00', 1, 1, 10),
+(10, 'QUIZ- Extreme Programming TARDE', '2017-05-25 00:00:00', 1, 1, 10),
+(11, 'QUIZ- Requisitos de Software - TARDE', '2017-06-13 17:00:00', 1, 1, 10),
+(12, 'QUIZ - Requisitos de Software NOITE', '2017-06-13 20:38:00', 1, 1, 10),
+(13, 'Avaliação Unidade I NOITE', '2017-06-27 15:00:00', 1, 3, 10),
+(14, 'Avaliação Unidade I TARDE', '2017-06-27 18:00:00', 1, 3, 10),
+(15, 'QUIZ Ferramentas Case - Tarde', '2017-07-06 17:00:00', 1, 1, 10),
+(16, 'QUIZ Ferramentas Case - NOite', '2017-07-06 20:00:00', 1, 1, 10),
+(17, 'QUIZ - GERENCIAMENTO DE PROJETO - 3 TARDE', '2017-07-13 16:00:00', 1, 1, 10),
+(18, 'QUIZ - GERENCIAMENTO DE PROJETO - 3 NOITE', '2017-07-13 20:00:00', 1, 1, 10),
+(19, 'Exercício Gerenciamento de Projeto - TARDE', '2017-07-17 00:00:00', 1, 2, 10),
+(20, 'Exercício Gerenciamento de Projeto - NOITE', '2017-07-18 00:00:00', 1, 2, 10),
+(21, 'Exercício de Gerenciamento de Risco - TARDE', '2017-07-22 11:00:12', 1, 2, 10),
+(22, 'Exercício de Gerenciamento de Risco - NOITE', '2017-07-22 11:01:29', 1, 2, 10),
+(23, 'Atividade de Padrão de Projeto - Tarde', '2017-07-27 17:31:03', 1, 2, 10),
+(24, 'Exercício de Padrões de Projeto', '2017-07-27 21:45:22', 1, 2, 10);
+
+CREATE TABLE `atividade_nota` (
+  `id` int(11) NOT NULL,
+  `atividade_idatividade` int(11) NOT NULL,
+  `aluno_idaluno` int(11) NOT NULL,
+  `nota` double NOT NULL,
+  `iddisciplina` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `atividade_nota` (`id`, `atividade_idatividade`, `aluno_idaluno`, `nota`, `iddisciplina`) VALUES
+(12, 4, 23, 0.6, 4),
+(13, 4, 165, 0.9, 4),
+(14, 5, 166, 0.6, 4),
+(15, 4, 167, 0, 4),
+(16, 4, 169, 0.6, 4),
+(17, 4, 170, 0.7, 4),
+(18, 5, 23, 0.6, 4),
+(19, 5, 165, 0.7, 4),
+(20, 6, 166, 0.6, 4),
+(21, 5, 167, 0.6, 4),
+(22, 5, 169, 0.6, 4),
+(23, 5, 170, 0.4, 4),
+(24, 6, 23, 0, 4),
+(25, 6, 165, 0.5, 4),
+(26, 4, 166, 0.6, 4),
+(27, 6, 167, 0.7, 4),
+(29, 6, 170, 0.6, 4),
+(30, 6, 171, 0.6, 4),
+(31, 5, 171, 0.5, 4),
+(32, 4, 171, 0.7, 4),
+(34, 7, 173, 0.9, 4),
+(42, 7, 174, 0.5, 4),
+(63, 7, 181, 0, 4),
+(64, 7, 172, 0, 4),
+(65, 10, 173, 0.7, 4),
+(66, 10, 174, 0.8, 4),
+(67, 7, 175, 0.4, 4),
+(68, 7, 176, 0.5, 4),
+(69, 7, 177, 0.7, 4),
+(70, 7, 180, 0.6, 4),
+(72, 9, 172, 0.4, 4),
+(73, 9, 173, 0.8, 4),
+(74, 9, 174, 0.2, 4),
+(75, 9, 175, 0.3, 4),
+(76, 9, 176, 0.5, 4),
+(77, 9, 177, 0.7, 4),
+(78, 9, 180, 0.5, 4),
+(79, 9, 181, 0.5, 4),
+(80, 10, 172, 0.6, 4),
+(83, 10, 175, 0.4, 4),
+(84, 10, 176, 0.5, 4),
+(85, 10, 177, 0.7, 4),
+(86, 10, 180, 0, 4),
+(87, 10, 181, 0.8, 4),
+(88, 11, 172, 0, 4),
+(89, 11, 173, 0.63, 4),
+(90, 11, 174, 0.54, 4),
+(91, 11, 175, 0.54, 4),
+(92, 11, 176, 0.81, 4),
+(93, 11, 177, 0.72, 4),
+(94, 11, 180, 0.54, 4),
+(95, 11, 181, 0, 4),
+(96, 12, 23, 0.54, 4),
+(97, 12, 165, 0.63, 4),
+(98, 12, 166, 0, 4),
+(99, 12, 167, 0.64, 4),
+(100, 12, 169, 0, 4),
+(101, 12, 170, 0.54, 4),
+(102, 12, 171, 0.72, 4),
+(103, 13, 23, 5.8, 4),
+(104, 13, 165, 6.8, 4),
+(105, 13, 166, 2.7, 4),
+(106, 13, 167, 5.3, 4),
+(107, 13, 169, 6.2, 4),
+(108, 13, 170, 6.4, 4),
+(109, 13, 171, 7.2, 4),
+(110, 14, 172, 3, 4),
+(111, 14, 173, 7.1, 4),
+(112, 14, 174, 5.8, 4),
+(113, 14, 175, 6.3, 4),
+(114, 14, 176, 5.4, 4),
+(115, 14, 177, 7.7, 4),
+(116, 14, 180, 4.1, 4),
+(117, 14, 181, 5.9, 4),
+(118, 15, 172, 0, 4),
+(119, 15, 173, 0, 4),
+(120, 15, 174, 0.63, 4),
+(121, 15, 175, 0.81, 4),
+(122, 15, 176, 0.54, 4),
+(123, 15, 177, 0.82, 4),
+(124, 15, 180, 0, 4),
+(125, 15, 181, 0.72, 4),
+(126, 16, 23, 0.75, 4),
+(127, 16, 165, 0.76, 4),
+(128, 16, 166, 0.76, 4),
+(129, 16, 167, 0.83, 4),
+(130, 16, 169, 0.84, 4),
+(131, 16, 170, 0.5, 4),
+(132, 16, 171, 0.66, 4),
+(133, 17, 172, 0, 4),
+(134, 17, 173, 0, 4),
+(135, 17, 174, 0.63, 4),
+(136, 17, 175, 0.54, 4),
+(137, 17, 176, 0.72, 4),
+(138, 17, 177, 0.82, 4),
+(139, 17, 180, 0.45, 4),
+(140, 17, 181, 0.73, 4),
+(141, 18, 23, 0.09, 4),
+(142, 18, 165, 0, 4),
+(143, 18, 166, 0, 4),
+(144, 18, 167, 0.73, 4),
+(145, 18, 169, 0.45, 4),
+(146, 18, 170, 0.74, 4),
+(147, 18, 171, 0.72, 4),
+(148, 19, 172, 0, 4),
+(149, 19, 173, 0, 4),
+(150, 19, 174, 1, 4),
+(151, 19, 175, 1, 4),
+(152, 19, 176, 1, 4),
+(153, 19, 177, 1, 4),
+(154, 19, 180, 1, 4),
+(155, 19, 181, 1, 4),
+(156, 20, 23, 1, 4),
+(157, 20, 165, 1, 4),
+(158, 20, 166, 1, 4),
+(159, 20, 167, 0, 4),
+(160, 20, 169, 1, 4),
+(161, 20, 170, 1, 4),
+(162, 20, 171, 1, 4),
+(190, 0, 23, 1, 4),
+(191, 0, 165, 1, 4),
+(192, 0, 166, 1, 4),
+(193, 0, 23, 1, 4),
+(194, 0, 165, 2, 4),
+(195, 0, 23, 1, 4),
+(196, 21, 172, 0, 4),
+(197, 21, 173, 0.5, 4),
+(198, 21, 174, 1, 4),
+(199, 21, 175, 1, 4),
+(200, 21, 176, 1, 4),
+(201, 21, 177, 1, 4),
+(202, 21, 181, 1, 4),
+(203, 21, 180, 0, 4),
+(204, 22, 23, 1, 4),
+(205, 22, 165, 1, 4),
+(206, 22, 166, 0.5, 4),
+(207, 22, 167, 1, 4),
+(208, 22, 169, 1, 4),
+(209, 22, 170, 1, 4),
+(210, 22, 171, 1, 4),
+(211, 23, 177, 0.5, 4),
+(212, 23, 181, 0.5, 4),
+(213, 23, 180, 0.5, 4),
+(214, 24, 165, 0.5, 4),
+(215, 24, 166, 0.5, 4),
+(216, 24, 169, 0.5, 4);
+
+
+
+CREATE TABLE `atividade_tipo` (
+  `id` int(11) NOT NULL,
+  `descricao` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `atividade_tipo` (`id`, `descricao`) VALUES
+(1, 'Quiz'),
+(2, 'Exercício'),
+(3, 'Avaliação');
+
+CREATE TABLE `disciplina` (
+  `iddisciplina` int(10) UNSIGNED NOT NULL,
+  `descricaodisciplina` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `disciplina` (`iddisciplina`, `descricaodisciplina`) VALUES
+(1, 'Segurança do Trabalho   '),
+(2, 'Desenvolvimento para Web II    '),
+(3, 'Empreendedorismo    '),
+(4, 'Engenharia de SoftWare'),
+(5, 'Implantação e Administração de Serviços Web   '),
+(6, 'Interação Humano-Computador     '),
+(7, 'Projeto e Prática II    '),
+(8, 'Banco de Dados     '),
+(9, 'Desenvolvimento Para Web I     '),
+(10, 'Ética Profissional e Cidadania     '),
+(11, 'Programação Orientada a Objeto    '),
+(12, 'Projeto e Prática I     '),
+(13, 'Segurança de sistemas Para Internet     '),
+(14, 'Sistemas Operacionais     '),
+(15, 'Fundamentos da Informática    '),
+(16, 'Lógica de Programação e Estrutura de Dados     '),
+(17, 'Inglês Instrumental    '),
+(18, 'Matemática Aplicada    '),
+(19, 'Português Instrumental    '),
+(20, 'Rede de computadores     ');
+
+
+CREATE TABLE `feedback` (
+  `idfeedback` int(11) NOT NULL,
+  `idaluno` int(11) NOT NULL,
+  `iddisciplina` int(11) NOT NULL,
+  `idusuario` int(11) DEFAULT NULL,
+  `titulo` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `descricao` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `data` datetime NOT NULL,
+  `visualizada` int(11) NOT NULL COMMENT '0- NÃO VISUALIZADA 1-NÃO CONCORDA  2-CONCORDA',
+  `urlimagem` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `urllink` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `semestre_idsemestre` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT INTO `feedback` (`idfeedback`, `idaluno`, `iddisciplina`, `idusuario`, `titulo`, `descricao`, `data`, `visualizada`, `urlimagem`, `urllink`, `semestre_idsemestre`) VALUES
+(14, 116, 14, 10, 'Feedback Prova', 'Parabéns, você foi muito bem na prova, continue assim.', '2017-02-10 02:04:30', 0, '', '', 1),
+(3, 1, 13, 10, 'FeedBack de Engenharia de software', 'Seu desempenho no QUiz foi satisfatório, mas ainda necessita internalizar os conhecimentos dos modelos de software.', '2017-02-09 00:00:00', 2, '', '', 1),
+(13, 1, 14, 16, 'FeedBack de Sistemas Operacionais', 'Sugiro pegar aulas particulares com o Professor Francisco', '2017-02-09 18:45:58', 2, '', '', 1),
+(12, 1, 14, 16, 'FeedBack de Sistemas Operacionais', 'Você precisa ler mais sobre o funcionamento dos sistemas operacionais, sugiro que se dedique mais nas aulas.', '2017-02-09 18:43:43', 2, '', '', 1),
+(11, 1, 13, 10, 'FeedBack de Engenharia de software', 'Seu desempenho não está satisfatório, devido a isso sugiro que você estude a apostila de Engenharia de Software para poder assimiliar melhor as fases de desenvolvimento de software.', '2017-02-09 13:00:19', 2, '', '', 1),
+(15, 114, 2, 10, 'Ausencia nas aulas', 'Maxwell, estou preocupado com suas ausências nas aulas, pois seu rendimento vem caindo devido a isso, desta forma fica difícil de você concluir com êxito sua disciplina.', '2017-02-13 18:50:05', 0, '', '', 1),
+(16, 160, 15, 10, 'Feedback de Informática', 'caro Yuri, seu desempenho na disciplina é considerado satisfatório, continue sempre assim.', '2017-02-14 17:28:14', 0, '', '', 1),
+(17, 159, 16, 10, 'Feedback Exercício I - Lógica de Programação', 'Você necessita praticar mais os comandos de repetição, uma vez que teve dificuldade em resolver os exercícios com esta proposta.', '2017-02-14 18:49:00', 0, '', '', 1),
+(18, 1, 15, 10, 'Feedback Prova', 'o que aconteceu, seu desempenho foi Pífio.', '2017-02-15 22:14:31', 2, '', '', 1),
+(19, 116, 12, 10, 'Feedback Projeto e Prática', 'O cronograma nunca fica atualizado, verifiquem isso e fiquem atentos para sempre está atualizando', '2017-02-16 22:17:58', 0, '', '', 1),
+(20, 1, 16, 16, 'Feedback de Programação', 'Caro Aluno  você não está realizando as atividades e nem está aparecendo nas aulas, nós do IFPE nós preocupamos com você, existem algum problema que possamos ajudar, conte conosco e entre em contato c', '2017-02-20 15:05:51', 2, 'http://blog.qatestlab.com/wp-content/uploads/2011/12/Error.jpg', '', 1),
+(21, 1, 4, 10, 'Feedback Quiz', 'Segue e seu gráfico da evolução no Quiz', '2017-05-26 13:36:14', 2, 'http://professornilson.com/mobile/graficos/esnoite/rafael.PNG', '', 1),
+(22, 1, 4, 10, 'Feedback Quiz', 'Segue e seu gráfico da evolução no Quiz', '2017-05-26 13:49:39', 2, 'http://professornilson.com/mobile/graficos/esnoite/rafael.PNG', '', 1),
+(23, 167, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico da evolução no Quiz,analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 17:53:23', 2, 'http://professornilson.com/mobile/graficos/esnoite/girao.PNG', '', 1),
+(24, 169, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico da evolução no Quiz,analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 17:54:14', 0, 'http://professornilson.com/mobile/graficos/esnoite/moises.PNG', '', 1),
+(25, 171, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico da evolução no Quiz,analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 17:54:42', 2, 'http://professornilson.com/mobile/graficos/esnoite/ruggery.PNG', '', 1),
+(27, 166, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico da evolução no Quiz,analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 17:56:18', 2, 'http://professornilson.com/mobile/graficos/esnoite/joran.PNG', '', 1),
+(28, 170, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico da evolução no Quiz,analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 17:56:36', 2, 'http://professornilson.com/mobile/graficos/esnoite/rafael.PNG', '', 1),
+(29, 165, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico de evolução no Quiz, analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 17:57:22', 2, 'http://professornilson.com/mobile/graficos/esnoite/hewerton.PNG', '', 1),
+(30, 1, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico de evolução no Quiz, analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 21:19:22', 2, 'http://professornilson.com/mobile/graficos/esnoite/girao.PNG', '', 1),
+(31, 1, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico de evolução no Quiz, analise e veja o que você pode fazer para melhorar seu desempenho nesta atividade.', '2017-05-26 21:21:42', 2, 'http://professornilson.com/mobile/graficos/esnoite/girao.PNG', '', 1),
+(32, 1, 4, 10, 'Feedback sobre Quiz', 'Segue gráfico de evolução no Quiz', '2017-05-26 21:30:32', 2, 'http://professornilson.com/mobile/graficos/esnoite/ruggery.PNG', '', 1),
+(33, 1, 4, 10, 'Feedback sobre Quiz', 'Segue gráfico de evolução no Quiz', '2017-05-26 21:31:09', 2, 'http://professornilson.com/mobile/graficos/esnoite/ruggery.PNG', '', 1),
+(34, 172, 4, 10, 'Feedback sobre Quiz', 'Segue seu gráfico de evolução do Quiz.', '2017-05-30 17:16:48', 2, 'http://professornilson.com/mobile/graficos/estarde/barbara.PNG', '', 1),
+(35, 173, 4, 10, 'Feedback do Quiz', 'Segue seu gráfico de evolução no Quiz', '2017-06-03 20:21:33', 2, 'http://professornilson.com/mobile/graficos/estarde/bruno.PNG', '', 1),
+(36, 34, 4, 10, 'Feedback do Quiz', 'Segue o gráfico de sua evolução no Quiz', '2017-06-03 20:22:34', 0, 'http://professornilson.com/mobile/graficos/estarde/dayane.PNG', '', 1),
+(37, 175, 4, 10, 'Feedback do Quiz', 'Segue o gráfico de sua evolução no Quiz', '2017-06-03 20:23:09', 2, 'http://professornilson.com/mobile/graficos/estarde/elen.PNG', '', 1),
+(38, 176, 4, 10, 'Feedback do Quiz', 'Segue o gráfico de sua evolução no Quiz', '2017-06-03 20:23:40', 2, 'http://professornilson.com/mobile/graficos/estarde/eveline.PNG', '', 1),
+(39, 177, 4, 10, 'Feedback do Quiz', 'Segue o gráfico de sua evolução no Quiz', '2017-06-03 20:23:56', 0, 'http://professornilson.com/mobile/graficos/estarde/gilmar.PNG', '', 1),
+(40, 180, 4, 10, 'Feedback do Quiz', 'Segue o gráfico de sua evolução no Quiz', '2017-06-03 20:24:36', 2, 'http://professornilson.com/mobile/graficos/estarde/marivaldo.PNG', '', 1),
+(41, 181, 4, 10, 'Feedback do Quiz', 'Segue o gráfico de sua evolução no Quiz', '2017-06-03 20:25:04', 2, 'http://professornilson.com/mobile/graficos/estarde/thayane.PNG', '', 1),
+(42, 180, 4, 10, 'Feedback sobre Engenharia de Software', 'Marivaldo, Estou preocupado com suas faltas e consequentemente as perdas das atividades que impactam  na sua nota final, você tem potencial para ser um aluno melhor e conseguir alcançar um melhor dese', '2017-07-25 17:24:42', 0, 'https://touts-images-2.s3.amazonaws.com/art/10530/xlarge_emoji-preocupado.jpg', '', 0);
+
+CREATE TABLE `notificacao` (
+  `idnotificacao` int(10) UNSIGNED NOT NULL,
+  `iddisciplina` int(11) NOT NULL,
+  `usuario_idusuario` int(10) UNSIGNED NOT NULL,
+  `tiponotificacao_idtiponotificacao` int(10) UNSIGNED NOT NULL,
+  `descricao` longtext,
+  `urlimagem` varchar(200) DEFAULT NULL,
+  `linknotificacao` varchar(200) DEFAULT NULL,
+  `titulonotificacao` varchar(200) DEFAULT NULL,
+  `data` datetime NOT NULL,
+  `semestre_idsemestre` int(11) NOT NULL DEFAULT '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `notificacao` (`idnotificacao`, `iddisciplina`, `usuario_idusuario`, `tiponotificacao_idtiponotificacao`, `descricao`, `urlimagem`, `linknotificacao`, `titulonotificacao`, `data`, `semestre_idsemestre`) VALUES
+(221, 4, 10, 2, 'Segue o link para realizar atualização do aplicativo', 'https://www.android.com/static/2016/img/hero-carousel/android-nougat.png', 'http://professornilson.com/mobile/app/android.apk', 'Atualização do Aplicativo', '2017-05-26 00:00:00', 1),
+(205, 4, 10, 2, 'Erros de software custam, só para a  economia dos EUA, cerca de  60 milhões dólares anualmente em retrabalho, perda de produtividade e danos reais. Todos nós sabemos o quanto erros nos programas podem ser irritantes, mas certas falhas de software também podem  ser caras, embaraçosas, destrutivas e mortais. Confira os famosos “desastres” que aconteceram no mundo do software nos últimos anos,  em ordem cronológica:', 'http://blog.qatestlab.com/wp-content/uploads/2011/12/Error.jpg', 'https://www.profissionaisti.com.br/2012/01/alguns-dos-mais-famosos-erros-de-softwares-da-historia/', 'Maiores Erros de Software', '2017-05-23 00:00:00', 1),
+(206, 4, 10, 2, 'Erros de software custam, só para a  economia dos EUA, cerca de  60 milhões dólares anualmente em retrabalho, perda de produtividade e danos reais. Todos nós sabemos o quanto erros nos programas podem ser irritantes, mas certas falhas de software também podem  ser caras, embaraçosas, destrutivas e mortais. Confira os famosos “desastres” que aconteceram no mundo do software nos últimos anos,  em ordem cronológica:', 'http://blog.qatestlab.com/wp-content/uploads/2011/12/Error.jpg', 'https://www.profissionaisti.com.br/2012/01/alguns-dos-mais-famosos-erros-de-softwares-da-historia/', 'Maiores Erros de Software', '2017-05-23 00:00:00', 1),
+(207, 4, 10, 2, 'Terá um QUIZhoje sobre os conhecimento das práticas do Extreme Programming, desta forma cada aluno terá que estudar o conteúdo do link antes de começar a responder o QUIZ.', 'http://blog.systemsltd.com/sites/default/files/xp-banner.jpg', 'http://docs.wixstatic.com/ugd/c43a4d_a7d306e2cf834cfb8781b7a2f89c1656.pdf', 'QUIZ - Extreme Programming', '2017-05-25 00:00:00', 1),
+(208, 4, 10, 2, 'Terá um QUIZhoje sobre os conhecimento das práticas do Extreme Programming, desta forma cada aluno terá que estudar o conteúdo do link antes de começar a responder o QUIZ.', 'http://blog.systemsltd.com/sites/default/files/xp-banner.jpg', 'http://docs.wixstatic.com/ugd/c43a4d_a7d306e2cf834cfb8781b7a2f89c1656.pdf', 'QUIZ - Extreme Programming', '2017-05-25 00:00:00', 1),
+(204, 4, 10, 2, 'Erros de software custam, só para a  economia dos EUA, cerca de  60 milhões dólares anualmente em retrabalho, perda de produtividade e danos reais. Todos nós sabemos o quanto erros nos programas podem ser irritantes, mas certas falhas de software também podem  ser caras, embaraçosas, destrutivas e mortais. Confira os famosos “desastres” que aconteceram no mundo do software nos últimos anos,  em ordem cronológica:', 'http://blog.qatestlab.com/wp-content/uploads/2011/12/Error.jpg', 'https://www.profissionaisti.com.br/2012/01/alguns-dos-mais-famosos-erros-de-softwares-da-historia/', 'Erros de Software', '2017-05-18 00:00:00', 1),
+(229, 4, 10, 2, 'sdsf', 'http://blog.qatestlab.com/wp-content/uploads/2011/12/Error.jpg', 'https://www.profissionaisti.com.br/2012/01/alguns-dos-mais-famosos-erros-de-softwares-da-historia/', 'Feedback sobre Quiz', '2017-05-31 12:03:16', 1),
+(230, 4, 10, 2, 'sdsf', 'http://blog.systemsltd.com/sites/default/files/xp-banner.jpg', 'https://www.profissionaisti.com.br/2012/01/alguns-dos-mais-famosos-erros-de-softwares-da-historia/', 'Feedback sobre Quiz', '2017-05-31 12:04:26', 1),
+(231, 4, 10, 2, 'Atualize o aplicativo e veja a novidade, não esqueça de apertar o legal curtindo a novidade.', 'http://www.diabetes.med.br/wp-content/uploads/post-tem-novidade-2.jpg', 'http://professornilson.com/mobile/app/android.apk', 'Atualização de App', '2017-06-12 17:39:15', 1),
+(232, 4, 10, 2, 'O que você gostaria de aprender hoje? Qual o emprego do seus sonhos? Descubra o programa Nanodegree perfeito para você!', 'https://cdn-images-1.medium.com/max/678/1*hWHfNVYS4B1dgB75bhUAXQ.png', 'https://br.udacity.com/?gclid=CJao5fH8x9QCFVAHkQodrxEKxA', 'Feedback do Quiz', '2017-06-18 15:02:05', 1),
+(233, 4, 10, 2, 'Como Se Tornar um Engenheiro de Software : Conforme a tecnologia evolui e se torna uma parte maior da vida cotidiana, também aumenta a necessidade de profissionais especializados no mercado de programação. Os engenheiros de software projetam e guiam o desenvolvimento de programas de computador utilizados para facilitar a vida de todos nós e, por mais que seja possível aprender a programar por conta própria, a educação formal é o melhor meio de se conseguir um emprego com mais responsabilidades e melhores pagamentos.', 'https://media.licdn.com/mpr/mpr/AAEAAQAAAAAAAAaLAAAAJDA1Zjk5YzliLTMzYTgtNDJiMy05YmE3LWFhMzc0Y2YwMDJmYw.jpg', 'http://pt.wikihow.com/Se-Tornar-um-Engenheiro-de-Software', 'Entrando no mundo da engenharia de software', '2017-06-20 13:31:04', 1),
+(234, 4, 10, 2, 'qweeqw', 'https://www.nitrd.gov/nitrdgroups/skins/vector/images/sdp.jpg', 'http://pt.wikihow.com/Se-Tornar-um-Engenheiro-de-Software', 'Aula 2 - Portugol Studio', '2017-06-22 19:33:21', 1),
+(235, 4, 10, 2, 'retert', 'http://professornilson.com/mobile/graficos/estarde/marivaldo.PNG', 'https://www.youtube.com/watch?v=ReHyj-ATKgc', 'Entrando no mundo da engenharia de software', '2017-06-22 19:52:35', 1),
+(236, 4, 10, 2, 'Estudem este conteúdo para o QUIZ  no dia 04/07', 'http://elivetoday.com/wp-content/uploads/2014/08/case-tools.jpg', 'http://professornilson.com/mobile/arquivos/Ferramentas%20CASE_%20Conhecendo%20algumas%20boas%20op%C3%A7%C3%B5es.pdf', 'Ferramentas Case - QUIZ 04/07', '2017-07-02 11:20:53', 1),
+(237, 4, 10, 2, 'Caro Aluno, você, que fica o dia inteiro na frente do computador acessando a internet o tempo todo e visitando milhares de sites por dia: acha que entende bastante sobre o assunto? Acha que todas as respostas do mundo podem ser obtidas depois de uma rápida pesquisa no Google? E, se não encontrar o que está procurando, acredita que é praticamente certo que a resposta não exista, não é mesmo?\r\nSentimos desapontá-lo, mas a internet é muito mais do que os buscadores, como o Google, o Bing e o Yahoo! conseguem mostrar. Na verdade, os resultados que são indexados por esses sites de pesquisa compreendem uma ínfima parte do que a internet realmente representa. Está curioso para saber do que estamos falando? Então, prepare-se para se aventurar nas profundezas da Deep Web, a porção da grande rede que poucos já exploraram.', 'https://img2.ibxk.com.br/2015/02/12/12135314405567.jpg?w=700', 'https://www.tecmundo.com.br/tecmundo-explica/74998-tecmundo-explica-tal-deep-web.htm', 'Deep Web', '2017-07-22 10:37:51', 1),
+(238, 4, 10, 2, 'Todos os anos, a Stack Overflow indaga dezenas de milhares de desenvolvedores na tentativa de revelar cenários e tendências do universo da programação. A edição de 2015, que coletou respostas junto a 50 mil pessoas, e descobriu pontos interessantes.\r\n\r\nO levantamento mais recente identificou que JavaScript continua como a linguagem de programação mais popular em uso. Mais da metade (55%) dos respondentes indicou que tem usado essa ferramenta.\r\n\r\nPHP caiu 4% na preferência dos programadores em um intervalo de doze meses. Agora, é usada por 25% dos entrevistados. A Stack Overflow atribuiu o declínio ao avanço do Node e Angular. Microsoft Visual Basic é considerada a linguagem “mais temida”.\r\n\r\n\r\nO levantamento também descobriu que 46% dos desenvolvedores não possuem uma formação acadêmica em ciências da computação ou qualquer curso relacionado à aula e mais de 57% programam praticamente todos os dias.\r\n\r\nDe maneira geral, a descrição de trabalho mais comum entre os desenvolvedores é “Full-Stack Web Developer”, com 28% das classificações; seguido por “Back-End Developer” (com 12%) e “estudante” (11%).\r\n\r\nO estudo indicou que a idade média dos profissionais gira entre 25 e 29 anos – faixa etária de 28% dos respondentes. O segundo maior grupo (23%) é composto por jovens entre 20 e 25 anos.\r\n\r\nA pesquisa, tristemente, comprova um sentimento bastante comum na indústria: não há equilíbrio entre gêneros. Os resultados apontam que 92% dos programadores que responderam o questionário são do sexo masculino.', 'https://cache.olhardigital.com.br/uploads/acervo_imagens/2013/08/20130828181845_660_420.jpg', 'https://insights.stackoverflow.com/survey/2016#technology-most-popular-technologies', 'Linguagens mais Populares', '2017-07-26 08:40:13', 1),
+(239, 4, 10, 2, 'Segue o link para você fazer a atualização de seu aplicativo', 'http://walkandtalk.com.br/oquetemotiva/wp-content/uploads/2012/11/novidade.gif', 'http://professornilson.com/mobile/app/android.apk', 'Atualização de App', '2017-07-26 10:42:14', 1);
+
+CREATE TABLE `notificacao_aluno` (
+  `notificacao_idnotificacao` int(10) UNSIGNED NOT NULL,
+  `aluno_idaluno` int(10) UNSIGNED NOT NULL,
+  `visualizada` int(1) NOT NULL DEFAULT '0' COMMENT 'QUANTIDADE DE VEZES VISUALIZADA PELO ALUNO',
+  `opiniao` int(11) NOT NULL COMMENT '1-NEGATIVA  2 - POSITIVA'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `notificacao_aluno` (`notificacao_idnotificacao`, `aluno_idaluno`, `visualizada`, `opiniao`) VALUES
+(212, 177, 0, 2),
+(210, 171, 2, 2),
+(210, 167, 0, 2),
+(210, 169, 0, 2),
+(204, 173, 3, 2),
+(205, 172, 0, 2),
+(205, 175, 2, 2),
+(205, 176, 1, 2),
+(205, 177, 0, 2),
+(205, 180, 1, 2),
+(205, 181, 2, 2),
+(206, 166, 3, 2),
+(206, 165, 1, 2),
+(206, 170, 3, 2),
+(207, 165, 2, 2),
+(207, 166, 2, 2),
+(207, 170, 1, 2),
+(207, 172, 4, 2),
+(207, 173, 1, 2),
+(207, 175, 1, 2),
+(207, 176, 2, 2),
+(207, 177, 2, 2),
+(207, 180, 1, 2),
+(207, 181, 3, 2),
+(208, 34, 0, 0),
+(209, 169, 1, 2),
+(209, 167, 2, 2),
+(209, 171, 0, 2),
+(212, 23, 0, 2),
+(212, 172, 1, 2),
+(212, 176, 1, 2),
+(212, 34, 0, 2),
+(212, 181, 0, 2),
+(212, 175, 0, 2),
+(212, 180, 1, 2),
+(212, 173, 0, 2),
+(212, 169, 0, 2),
+(212, 1, 6, 2),
+(212, 167, 0, 2),
+(212, 171, 0, 2),
+(212, 166, 0, 2),
+(212, 170, 0, 2),
+(212, 165, 3, 2),
+(221, 172, 2, 2),
+(221, 176, 1, 2),
+(221, 34, 0, 2),
+(221, 181, 3, 2),
+(221, 175, 0, 2),
+(221, 180, 2, 2),
+(221, 173, 2, 2),
+(221, 177, 2, 2),
+(221, 23, 2, 2),
+(221, 1, 9, 2),
+(221, 167, 0, 2),
+(221, 171, 2, 2),
+(221, 166, 3, 2),
+(221, 170, 5, 2),
+(221, 165, 3, 2),
+(221, 169, 0, 2),
+(222, 1, 2, 2),
+(223, 1, 1, 0),
+(224, 1, 1, 0),
+(225, 1, 1, 0),
+(231, 34, 0, 2),
+(227, 1, 1, 0),
+(231, 167, 0, 2),
+(229, 1, 11, 0),
+(230, 1, 4, 0),
+(231, 180, 1, 2),
+(231, 174, 0, 2),
+(231, 177, 2, 2),
+(231, 173, 4, 2),
+(231, 176, 3, 2),
+(231, 23, 0, 2),
+(231, 172, 0, 2),
+(231, 181, 4, 2),
+(231, 175, 1, 2),
+(231, 171, 1, 2),
+(231, 166, 0, 2),
+(231, 170, 1, 2),
+(231, 165, 2, 2),
+(231, 1, 8, 2),
+(231, 169, 0, 2),
+(232, 1, 3, 0),
+(233, 1, 4, 2),
+(233, 180, 0, 2),
+(233, 174, 0, 2),
+(233, 177, 2, 2),
+(233, 173, 2, 2),
+(233, 176, 3, 2),
+(233, 172, 0, 2),
+(233, 181, 3, 2),
+(233, 175, 0, 2),
+(233, 171, 2, 2),
+(233, 166, 1, 2),
+(233, 170, 2, 2),
+(233, 165, 0, 2),
+(233, 169, 0, 2),
+(233, 23, 0, 2),
+(233, 167, 0, 2),
+(234, 1, 6, 0),
+(235, 1, 3, 0),
+(236, 176, 4, 2),
+(236, 172, 0, 2),
+(236, 181, 5, 2),
+(236, 175, 2, 2),
+(236, 1, 7, 2),
+(236, 180, 1, 2),
+(236, 174, 1, 2),
+(236, 177, 2, 2),
+(236, 173, 4, 2),
+(236, 169, 0, 2),
+(236, 23, 3, 2),
+(236, 167, 1, 2),
+(236, 171, 3, 2),
+(236, 166, 1, 2),
+(236, 170, 0, 2),
+(236, 165, 3, 2),
+(237, 176, 0, 2),
+(237, 172, 0, 2),
+(237, 181, 2, 2),
+(237, 175, 0, 2),
+(237, 1, 4, 2),
+(237, 180, 2, 2),
+(237, 174, 0, 2),
+(237, 177, 1, 2),
+(237, 173, 1, 2),
+(237, 23, 0, 2),
+(237, 167, 0, 2),
+(237, 171, 1, 2),
+(237, 166, 1, 2),
+(237, 170, 0, 2),
+(237, 165, 2, 2),
+(237, 169, 0, 2),
+(238, 176, 0, 0),
+(238, 172, 0, 0),
+(238, 181, 1, 0),
+(238, 175, 0, 0),
+(238, 1, 1, 2),
+(238, 180, 0, 0),
+(238, 174, 0, 0),
+(238, 177, 1, 2),
+(238, 173, 0, 0),
+(238, 23, 0, 0),
+(238, 167, 0, 0),
+(238, 171, 0, 2),
+(238, 166, 0, 0),
+(238, 170, 0, 0),
+(238, 165, 3, 2),
+(238, 169, 1, 0),
+(239, 180, 0, 0),
+(239, 174, 0, 0),
+(239, 177, 4, 2),
+(239, 173, 1, 2),
+(239, 176, 0, 0),
+(239, 172, 0, 0),
+(239, 181, 0, 0),
+(239, 175, 0, 0),
+(239, 1, 5, 0),
+(239, 166, 0, 0),
+(239, 170, 0, 2),
+(239, 165, 2, 2),
+(239, 169, 0, 0),
+(239, 23, 0, 0),
+(239, 167, 0, 0),
+(239, 171, 1, 2);
+
+
+CREATE TABLE `semestre` (
+  `id` int(11) NOT NULL,
+  `semestre` varchar(6) NOT NULL,
+  `ativo` int(1) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+INSERT INTO `semestre` (`id`, `semestre`, `ativo`) VALUES
+(1, '2017.1', 1),
+(2, '2018.2', 0);
+
+CREATE TABLE `tiponotificacao` (
+  `idtiponotificacao` int(10) UNSIGNED NOT NULL,
+  `descricaonotificacao` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `tiponotificacao` (`idtiponotificacao`, `descricaonotificacao`) VALUES
+(1, 'Notificação curta'),
+(2, 'Notificação longa'),
+(3, 'Notificação com imagem'),
+(4, 'Notificação com botão');
+
+CREATE TABLE `tipousuario` (
+  `idtipousuario` int(10) UNSIGNED NOT NULL,
+  `descricaousuario` varchar(100) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `tipousuario` (`idtipousuario`, `descricaousuario`) VALUES
+(1, 'Professor'),
+(2, 'Técnico'),
+(3, 'Administrador');
+
+CREATE TABLE `turma` (
+  `idturma` int(10) UNSIGNED NOT NULL,
+  `nometurma` varchar(100) DEFAULT NULL,
+  `periodo` int(1) NOT NULL,
+  `turnoturma` varchar(20) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+INSERT INTO `turma` (`idturma`, `nometurma`, `periodo`, `turnoturma`) VALUES
+(1, 'técnico em informática para internet - 1', 1, 'vespertino'),
+(2, 'técnico em informática para internet  - 2', 2, 'noturno'),
+(3, 'técnico em informática para internet - 3', 3, 'vespertino'),
+(4, 'técnico em informática para internet - 1', 1, 'noturno'),
+(5, 'técnico em informática para internet - 2', 2, 'vespertino'),
+(6, 'técnico em informática para internet - 3', 3, 'noturno');
+
+CREATE TABLE `turma_disciplina` (
+  `id` int(11) NOT NULL,
+  `turma_idturma` int(10) UNSIGNED NOT NULL,
+  `disciplina_iddisciplina` int(10) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `turma_disciplina` (`id`, `turma_idturma`, `disciplina_iddisciplina`) VALUES
+(1, 1, 1),
+(2, 1, 15),
+(3, 1, 17),
+(4, 1, 16),
+(5, 1, 18),
+(6, 1, 19),
+(7, 1, 20),
+(8, 4, 1),
+(9, 4, 15),
+(10, 4, 17),
+(11, 4, 16),
+(12, 4, 18),
+(13, 4, 19),
+(14, 4, 20),
+(15, 2, 8),
+(16, 2, 9),
+(17, 2, 10),
+(18, 2, 11),
+(19, 2, 12),
+(20, 2, 13),
+(21, 2, 14),
+(22, 5, 8),
+(23, 5, 9),
+(24, 5, 10),
+(25, 5, 11),
+(26, 5, 12),
+(27, 5, 13),
+(28, 5, 14),
+(29, 3, 2),
+(30, 3, 3),
+(31, 3, 4),
+(32, 3, 5),
+(33, 3, 6),
+(34, 3, 7),
+(35, 6, 2),
+(36, 6, 3),
+(37, 6, 4),
+(38, 6, 5),
+(39, 6, 6),
+(40, 6, 7);
+
+
+CREATE TABLE `usuario` (
+  `idusuario` int(10) UNSIGNED NOT NULL,
+  `tokenusuario` varchar(100) NOT NULL,
+  `tipousuario_idtipousuario` int(10) UNSIGNED DEFAULT NULL,
+  `cpfusuario` varchar(11) DEFAULT NULL,
+  `nomeusuario` varchar(100) DEFAULT NULL,
+  `nomereduzido` varchar(50) NOT NULL,
+  `senha` varchar(80) DEFAULT NULL,
+  `usuarioativo` int(1) UNSIGNED DEFAULT NULL,
+  `urlimage` varchar(300) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `usuario` (`idusuario`, `tokenusuario`, `tipousuario_idtipousuario`, `cpfusuario`, `nomeusuario`, `nomereduzido`, `senha`, `usuarioativo`, `urlimage`) VALUES
+(1, '', 1, NULL, 'Sergio Torres de Santana    ', 'Sergio Torres', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(2, '', 1, NULL, 'Ana Josil Sá Barreto Montenegro     ', '', NULL, 0, 'http://myo.aksaray.edu.tr/files/Documents/Personel_Foto/bayan_foto_yok.png'),
+(3, '', 1, NULL, 'Diego Cesar Florencio de Queiroz    ', 'Diego Queiroz', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(4, '', 1, NULL, 'Thiago Marques Madureira    ', 'Thiago Marques', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(5, '', 1, NULL, 'Eleonor de Fátima Benício Cordeiro     ', 'Eleonor Cordeiro', NULL, 0, 'http://myo.aksaray.edu.tr/files/Documents/Personel_Foto/bayan_foto_yok.png'),
+(6, '', 1, NULL, 'Luciano de Souza Cabral     ', 'Luciano Cabral', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(7, '', 1, NULL, 'Symone Figueiredo do Nascimento     ', 'Symone Figueiredo', NULL, 0, 'http://myo.aksaray.edu.tr/files/Documents/Personel_Foto/bayan_foto_yok.png'),
+(8, '', 1, NULL, 'Roberto Luiz Sena de Alencar     ', 'Roberto Alencar', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(9, '', 1, NULL, 'José Sóstenes Silva Cruz     ', 'Sóstenes Silva', NULL, 0, ''),
+(10, '', 3, '03107383422', 'Nilson Cândido de Oliveira Júnior     ', 'Nilson Júnior', 'e10adc3949ba59abbe56e057f20f883e', 1, 'http://www.professornilson.com/mobile/img/profnilson.jpg'),
+(11, '', 1, NULL, 'Diego dos Passos Silva     ', 'Diego Passos', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(12, '', 1, '03057251498', 'Francisco do Nascimento Junior     ', 'Francisco Nascimento', 'e10adc3949ba59abbe56e057f20f883e', 0, 'https://scontent.fbsb9-1.fna.fbcdn.net/v/t1.0-9/15055848_1238116126253092_4120024676887026065_n.jpg?oh=e12d6604f8244ab07a22cad396235e8f&oe=593BBF51'),
+(13, '', 1, NULL, 'Havana Diogo Alves     ', 'Havana Alves', NULL, 0, 'http://myo.aksaray.edu.tr/files/Documents/Personel_Foto/bayan_foto_yok.png'),
+(14, '', 1, NULL, 'Maria Carolina Torres da Silva     ', 'Maria Carolina', NULL, 0, 'http://myo.aksaray.edu.tr/files/Documents/Personel_Foto/bayan_foto_yok.png'),
+(15, '', 1, NULL, 'Josino Rodrigues Neto     ', 'Josino Rodrigues', NULL, 0, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg'),
+(16, '', 1, '11219640441', 'Administrador', 'Administrador', 'e10adc3949ba59abbe56e057f20f883e', 1, 'https://image.freepik.com/vetores-gratis/icone-de-usuario-do-sexo-masculino_17-810120247.jpg');
+
+
+CREATE TABLE `usuario_disciplina` (
+  `id` int(11) NOT NULL,
+  `usuario_idusuario` int(10) UNSIGNED NOT NULL,
+  `disciplina_iddisciplina` int(10) UNSIGNED NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+INSERT INTO `usuario_disciplina` (`id`, `usuario_idusuario`, `disciplina_iddisciplina`) VALUES
+(1, 1, 6),
+(2, 1, 15),
+(3, 2, 17),
+(4, 3, 16),
+(5, 4, 18),
+(6, 5, 17),
+(7, 5, 19),
+(8, 6, 13),
+(9, 6, 20),
+(10, 7, 1),
+(11, 7, 10),
+(12, 8, 2),
+(13, 8, 11),
+(14, 9, 3),
+(15, 10, 4),
+(16, 10, 12),
+(17, 11, 5),
+(18, 11, 14),
+(19, 12, 7),
+(20, 12, 12),
+(21, 13, 8),
+(22, 13, 9),
+(23, 14, 8),
+(24, 15, 9),
+(25, 15, 11);
+
+ALTER TABLE `aluno`
+  ADD PRIMARY KEY (`idaluno`);
+
+ALTER TABLE `aluno_disciplina`
+  ADD PRIMARY KEY (`idalunodisciplina`);
+
+ALTER TABLE `aluno_turma`
+  ADD PRIMARY KEY (`idalunoturma`);
+
+ALTER TABLE `atividade`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `atividade_nota`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `atividade_tipo`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `disciplina`
+  ADD PRIMARY KEY (`iddisciplina`);
+
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`idfeedback`);
+
+ALTER TABLE `notificacao`
+  ADD PRIMARY KEY (`idnotificacao`),
+  ADD KEY `notificacao_FKIndex1` (`tiponotificacao_idtiponotificacao`),
+  ADD KEY `notificacao_FKIndex2` (`usuario_idusuario`);
+
+ALTER TABLE `notificacao_aluno`
+  ADD PRIMARY KEY (`notificacao_idnotificacao`,`aluno_idaluno`),
+  ADD KEY `notificacao_aluno_FKIndex1` (`notificacao_idnotificacao`),
+  ADD KEY `notificacao_aluno_FKIndex2` (`aluno_idaluno`);
+
+ALTER TABLE `semestre`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `tiponotificacao`
+  ADD PRIMARY KEY (`idtiponotificacao`);
+
+ALTER TABLE `tipousuario`
+  ADD PRIMARY KEY (`idtipousuario`);
+
+ALTER TABLE `turma`
+  ADD PRIMARY KEY (`idturma`);
+
+ALTER TABLE `turma_disciplina`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idusuario`);
+
+ALTER TABLE `usuario_disciplina`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `aluno`
+  MODIFY `idaluno` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1395;
+
+ALTER TABLE `aluno_disciplina`
+  MODIFY `idalunodisciplina` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
+ALTER TABLE `aluno_turma`
+  MODIFY `idalunoturma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+ALTER TABLE `atividade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+ALTER TABLE `atividade_nota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+
+ALTER TABLE `atividade_tipo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE `disciplina`
+  MODIFY `iddisciplina` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+ALTER TABLE `feedback`
+  MODIFY `idfeedback` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+ALTER TABLE `notificacao`
+  MODIFY `idnotificacao` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=240;
+
+ALTER TABLE `semestre`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+ALTER TABLE `tipousuario`
+  MODIFY `idtipousuario` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+ALTER TABLE `turma`
+  MODIFY `idturma` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+ALTER TABLE `turma_disciplina`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+ALTER TABLE `usuario_disciplina`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
